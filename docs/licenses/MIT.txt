@@ -1,0 +1,34 @@
+MIT 许可证（MIT License）
+
+本文件适用于 HoneySky White Board 使用的多个以 MIT 许可证发布的第三方组件，各组件版权声明如下：
+
+- SkiaSharp / SkiaSharp.NativeAssets.Win32 2.88.9：Copyright (c) 2015-2016 Xamarin, Inc.；Copyright (c) 2017-2018 Microsoft Corporation.
+- MessagePack (MessagePack-CSharp) 2.5.198：Copyright (c) 2017 Yoshifumi Kawai and contributors.
+- CommunityToolkit.Mvvm 8.3.2：Copyright (c) .NET Foundation and Contributors.
+- Microsoft.Extensions.DependencyInjection 8.0.1：Copyright (c) .NET Foundation and Contributors.
+- System.Security.Cryptography.ProtectedData 8.0.0：Copyright (c) .NET Foundation and Contributors.
+- WpfMath 2.1.0：Copyright (c) WpfMath contributors.
+- FlaUI.UIA3 5.0.0（仅测试使用）：Copyright (c) 2016-2024 FlaUI contributors.
+- Microsoft .NET 8 运行时（随绿色版/安装包分发）：Copyright (c) .NET Foundation and Contributors.
+
+以下为许可证正文：
+
+Copyright (c) 版权持有人（见上）
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
