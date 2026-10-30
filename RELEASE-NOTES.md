@@ -14,7 +14,7 @@ HoneySky White Board（蜜空白板）是一款面向课堂与会议演示的 Wi
 ### 全新官网
 
 - 新增产品官网，包含功能演示、真实界面截图、系统要求与下载入口。
-- 官网同时发布在 GitHub Pages：https://chen-yang-lt.github.io/HoneySky-White-Board/
+- 官网同时发布在 GitHub Pages：https://chenyanglt.github.io/HoneySky-White-Board/
 
 ### GitHub 正式发布
 
