@@ -1,4 +1,4 @@
-# HoneySky White Board · 官网静态站（v1.2.1）
+# HoneySky White Board · 官网静态站（v1.2.2）
 
 零依赖、纯静态、可直接 `file://` 双击打开的官网。所有样式/脚本/图像都是本地文件，**没有 CDN、没有 Google Fonts、没有构建步骤**。
 
@@ -22,9 +22,20 @@ website/
   python -m http.server 8080      # 然后打开 http://127.0.0.1:8080
   ```
 
-## v1.2.1 新增内容（页面上的「v1.2.1 新增」区块）
+## v1.2.2 新增内容（页面上的「v1.2.2 新增」区块）
 
-页面 `#whats-new` 用 6 张卡片（`.cards` 三列 → 两行 3+3；≤1024 两列、≤768 一列）介绍本版变化，文案键 `f6.*` 与 `n1.*`–`n6.*`（中英成对），卡片下方一行 `f6.history` 回顾 v1.2.0 的能力：
+页面 `#whats-new` 用 6 张卡片（`.cards` 三列 → 两行 3+3；≤1024 两列、≤768 一列）介绍本版变化，文案键 `f6.*` 与 `n1.*`–`n6.*`（中英成对），卡片下方一行 `f6.history` 回顾 v1.2.1 的能力：
+
+1. **全屏浮窗置顶**：真全屏下「问 AI」浮窗与主窗口一同成为置顶窗口（`Owner=MainWindow` + `Topmost`），始终盖在画布之上，不再被全屏白板压住；退出全屏自动恢复普通层级。Dock 二级面板（Popup）实测原本就在主窗之上，未改动。
+2. **关于页 GitHub 直达**：关于页作者卡片新增「GitHub 仓库」链接，`UseShellExecute` 直接用默认浏览器打开 `github.com/ChenyangLT/HoneySky-White-Board`（公开仓库只含安装包/文档/官网，不含源码）。
+3. **更新检查 GitHub 优先、镜像兜底**：源顺序 ① GitHub API（5 s）→ ② gh-proxy JSON 镜像（8 s）→ ③ gh-proxy + releases.atom（8 s）；只有直连失败才继续下一个源，直连成功时零镜像请求。
+4. **启动默认不提示恢复**：新增 `GeneralSettings.PromptRecoveryOnStartup`（默认 **false**），启动不再弹「上次有未保存的文件」；**恢复快照不会被删除**，需要时在「设置 → 常规」勾选「启动时提示恢复未保存的文档（默认关闭）」再启动即可恢复。
+5. **清除缓存按钮**：「设置 → 关于」操作行新增「清除缓存」，二次确认后只清 `AppPaths.Cache` 与 `AppPaths.Thumbnails` 的内容（保留目录），**不动** Documents / Settings / Recovery，并提示释放的字节数。
+6. **默认画笔/矩形沿用 v1.2.1**：打开仍是画笔、形状默认矩形，v1.2.1 定下的默认工具在 v1.2.2 保持不变；工具栏显示、固定与排序照旧可调。
+
+### 历史：v1.2.1 新增内容
+
+v1.2.1 的 6 条仍保留在页面上（通过卡片下方 `f6.history` 一句话回顾）：
 
 1. **启动即全屏**：打开软件直接进入覆盖任务栏的真全屏；退出方式为右下角全屏按钮 / Esc / F11。
 2. **翻页条上的全屏按钮**：右下角翻页条在「下一页」之后、缩放与适应窗口之前新增全屏按钮。
@@ -75,9 +86,9 @@ v1.2.0 的 8 条能力仍在页面上（`f1`–`f5` 功能区块与下载区）�
 1. 同名覆盖 `assets/img/xxx.png`；
 2. 把 `index.html` 里该 `<img>` 的 `width`/`height` 改成新图真实像素；
 3. 若新图宽高比变化很大，按上面「布局规则」挑/调画框类（或者只改对应 `.duo` 的 `--shot-ar`），不需要改 `img` 尺寸逻辑；
-4. `node artifacts/tools/measure-shots.mjs --url <file url> --out artifacts/screenshots/v121-site-final/_shots.json` 复核：看 `letterboxPct`（留白比例）、`overflowX`、`PROBLEMS`（应为 0）。
+4. `node artifacts/tools/measure-shots.mjs --url <file url> --out artifacts/screenshots/v122-site/_shots.json` 复核：看 `letterboxPct`（留白比例）、`overflowX`、`PROBLEMS`（应为 0）。
 
-**当前 8 张的版本分布（2026-10-31 更新）**：`hero-main` / `pages` / `settings` 已换成 **v1.2.1 真机图**（同名覆盖，像素尺寸与旧图完全一致）；`brush` / `podium` / `ai-booth` 沿用 v1.2.0；`clock` / `countdown` 沿用 v1.1.3（时间工具未改版）。8 张图都不含真实环境影像与个人信息。
+**当前 8 张的版本分布（2026-10-31 更新）**：`hero-main` / `pages` / `settings` 已换成 **v1.2.2 真机图**（同名覆盖，像素尺寸与 v1.2.1 图完全一致，`index.html` 的 `width/height` 无需改动）；`brush` / `podium` / `ai-booth` 沿用 v1.2.0；`clock` / `countdown` 沿用 v1.1.3（时间工具未改版）。8 张图都不含真实环境影像与个人信息。
 
 - `podium.png`：讲台讲解界面，画面是导入的照片（测试用 DOCX 排版图）与红色批注，左下角是照片 1/照片 2 缩略图、底部有「拍照」与摄像头下拉。摄像头画面仍来自 NVIDIA Broadcast 虚拟摄像头，**不包含任何真实环境影像**。
 - `ai-booth.png`：真实 DeepSeek `deepseek-flash` 回答「解方程 x²-5x+6=0」的界面，块级公式正常渲染，底部有「回答字号 A− / 滑块 / A+」与 100%，状态行显示「余额：已关闭查询」。
@@ -86,35 +97,35 @@ v1.2.0 的 8 条能力仍在页面上（`f1`–`f5` 功能区块与下载区）�
 
 | 文件 | 来源 | 尺寸 | 内容 |
 | --- | --- | --- | --- |
-| `hero-main.png` | **v1.2.1 新图** | 1680×1050 | 主窗口：左上「图标 + 品牌字 + v1.2.1」水印 + 浮动 Dock + 左下页面缩略图条 + 右下翻页（含全屏按钮）/缩放条 + 手写与图形 |
+| `hero-main.png` | **v1.2.2 新图** | 1680×1050 | 主窗口：左上「图标 + 品牌字 + v1.2.2」水印 + 浮动 Dock + 左下页面缩略图条 + 右下翻页（含全屏按钮）/缩放条 + 手写与图形 |
 | `brush.png` | **v1.2.0 新图** | **320×402（竖版，旧图 320×300）** | Dock 画笔二级面板：画笔/荧光笔切换、12 色、粗细 3px、三笔尖 |
-| `pages.png` | **v1.2.1 新图** | 1680×1050 | 5 页白板；左下缩略图条只显示 3 个（第 3、4、5 页）+ 右下翻页条 5/5（含全屏按钮）+ 浮动 Dock |
-| `settings.png` | **v1.2.1 新图** | 780×700 | 设置常规页：页面栏/顶栏/浮动工具条/页面缩略图条（含「显示页数 3」）/翻页条、启动动画、启动时进入全屏（覆盖任务栏，Esc / F11 退出）等开关 |
+| `pages.png` | **v1.2.2 新图** | 1680×1050 | 5 页白板；左下缩略图条只显示 3 个（第 3、4、5 页，第 5 页选中）+ 右下翻页条 5/5（含全屏按钮）+ 浮动 Dock |
+| `settings.png` | **v1.2.2 新图** | 780×700 | 设置常规页（滚动到下半部分）：「启动时提示恢复未保存的文档（默认关闭）」、启动时恢复上次打开的文档、启动时显示动画（Splash）、启动时进入全屏（覆盖任务栏，Esc / F11 退出）、显示浮动工具条/页面缩略图（显示页数 3）/翻页条等开关 |
 | `podium.png` | **v1.2.0 新图** | 1920×1023 | 讲台：照片背景 + 红色批注 + 照片缩略图 + 拍照按钮 |
 | `ai-booth.png` | **v1.2.0 新图** | 1240×900 | AI 助手：deepseek-flash 因式分解回答 + 块级公式 + 回答字号滑块 |
 | `clock.png` | 沿用 v1.1.3 | 511×310 | 独立时钟窗口（1.2.0 未改版） |
 | `countdown.png` | 沿用 v1.1.3 | 515×435 | 独立倒计时窗口（1.2.0 未改版） |
 
-尺寸只在 `brush.png` 上发生过变化（320×300 → 320×402）；v1.2.1 的 `hero-main` / `pages` / `settings` 与旧图像素完全一致，因此 `index.html` 三个 `<img>` 的 `width/height` 不需要改动（只同步了 alt 与图注文案）。`.shot--panel` 不写死高度，竖版图按自身比例向下伸展（不裁切、不压扁）。图注与 `img.*` 的 alt 文案已同步为新图内容。
+尺寸只在 `brush.png` 上发生过变化（320×300 → 320×402）；v1.2.2 的 `hero-main` / `pages` / `settings` 与 v1.2.1 图像素完全一致，因此 `index.html` 三个 `<img>` 的 `width/height` 不需要改动（只同步了 alt 与图注文案）。`.shot--panel` 不写死高度，竖版图按自身比例向下伸展（不裁切、不压扁）。图注与 `img.*` 的 alt 文案已同步为新图内容。
 
 页面暂时没有图位、可选补拍的截图：Dock 全景、6 个二级面板、关于页、导入背景（PDF/Word）、全屏状态。
 
-### 截图替换状态（v1.2.1，2026-10-31）
+### 截图替换状态（v1.2.2，2026-10-31）
 
-v1.2.1 的界面变化集中在「启动全屏 + 翻页条全屏按钮 + 缩略图数量设置 + 左上角水印 + 关于页品牌字动画」，需要重拍的 3 张已由 Lead 同名覆盖到位：
+**v1.2.2 已替换 `hero-main` / `pages` / `settings`，其余 5 张沿用。** 三张新图是真机截图（Lead 提供于 `artifacts/screenshots/v122-shots/`，已同名覆盖到 `assets/img/`）：
 
-| 文件 | 应体现的 v1.2.1 变化 | 状态 |
+| 文件 | 应体现的 v1.2.2 变化 | 状态 |
 | --- | --- | --- |
-| `hero-main.png` | 左上角「图标 + 品牌字 + v1.2.1」水印；右下翻页条新增全屏按钮 | **已替换（v1.2.1 真机图，2026-10-31）** |
-| `pages.png` | 缩略图条默认只显示 3 个；翻页条新增全屏按钮 | **已替换（v1.2.1 真机图，2026-10-31）** |
-| `settings.png` | 常规页新增「页面缩略图条显示页数」与「启动时进入全屏」 | **已替换（v1.2.1 真机图，2026-10-31）** |
-| `brush.png` | 二级面板结构未变，不重拍 | 沿用 v1.2.0（320×402） |
-| `clock.png` / `countdown.png` | 时间工具未改版，不重拍 | 沿用 v1.1.3 |
-| `podium.png` / `ai-booth.png` | 讲台与 AI 助手未改版，不重拍 | 沿用 v1.2.0 |
+| `hero-main.png` | 左上角水印版本号 v1.2.2；Dock / 缩略图条 / 翻页条（含全屏按钮）/缩放条 | **已替换（v1.2.2 真机图，1680×1050）** |
+| `pages.png` | 5 页、缩略图条只显示第 3/4/5 页、翻页条 5/5（含全屏按钮） | **已替换（v1.2.2 真机图，1680×1050）** |
+| `settings.png` | 常规页滚动到底：「启动时提示恢复未保存的文档（默认关闭）」「启动时进入全屏（覆盖任务栏，Esc / F11 退出）」等 | **已替换（v1.2.2 真机图，780×700）** |
+| `brush.png` | 二级面板未变 | 沿用 v1.2.0（320×402） |
+| `clock.png` / `countdown.png` | 时间工具未改版 | 沿用 v1.1.3 |
+| `podium.png` / `ai-booth.png` | 讲台与 AI 助手未改版 | 沿用 v1.2.0 |
 
-3 张新图的像素尺寸与旧图完全一致（1680×1050 / 1680×1050 / 780×700），所以 `index.html` 的 `width`/`height` 未改，只更新了 alt 与图注措辞（新图里有水印、5 页白板、两个新设置项）。
+> 三张新图与旧图像素完全一致（1680×1050 / 1680×1050 / 780×700），因此 `index.html` 的 `width`/`height` 未改；已同步 `settings.png` 的 alt 与 `img.settings`（明确列出「启动时提示恢复未保存的文档（默认关闭）」等新开关），并重跑 `verify-site.mjs`（PROBLEMS 0）与 `measure-shots.mjs`（无横向溢出、三图 naturalWidth>0 且 contain 未裁切）。
 
-验收截图目录：`artifacts/screenshots/v121-site-final/`（15 张 PNG + `_verify.log` / `_shots.json` / `_measure.log` / `_shot.log`）。
+验收截图目录：`artifacts/screenshots/v122-site/`（15 张 PNG + `_shots.json`；v1.2.2 真机原图另存于 `artifacts/screenshots/v122-shots/`）。
 
 ## 文案与中英切换
 
@@ -140,7 +151,7 @@ v1.2.1 的界面变化集中在「启动全屏 + 翻页条全屏按钮 + 缩略�
 
 1. 把 `website/` 目录内容放到的 GitHub Pages 根（或仓库 `docs/` 目录）。
 2. 仓库 Settings → Pages → Source 选分支与目录即可，无需构建。
-3. 下载按钮目前统一指向 `https://github.com/ChenyangLT/HoneySky-White-Board/releases/latest`；正式发版后确认 Release 里确实带 `HoneySkyWhiteBoard-1.2.1-win-x64-setup.exe` / `-win-x64.msi` / `-win-x64-portable.zip` 与 `SHA256SUMS.txt`。
+3. 下载按钮目前统一指向 `https://github.com/ChenyangLT/HoneySky-White-Board/releases/latest`；正式发版后确认 Release 里确实带 `HoneySkyWhiteBoard-1.2.2-win-x64-setup.exe` / `-win-x64.msi` / `-win-x64-portable.zip` 与 `SHA256SUMS.txt`。
 
 ## 自检脚本（工作区 artifacts/tools/）
 

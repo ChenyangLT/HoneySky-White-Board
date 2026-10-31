@@ -2,7 +2,7 @@
 
 HoneySky White Board（蜜空白板）是一款面向 Windows 10/11 x64 的桌面白板软件，用于在线授课、讲解、会议板书与个人草稿。它提供无限画布上的压感书写、屏幕直尺与圆规、时钟倒计时、摄像头与截图、以及可对接任意 OpenAI 兼容服务的 AI 讲解面板。
 
-- 版本：1.2.1
+- 版本：1.2.2
 - 平台：Windows 10 1809（10.0.17763）及以上，仅 x64
 - 技术栈：C# / .NET 8 / WPF / SkiaSharp / MessagePack
 - 开发者：Chen_yang_LT
@@ -62,7 +62,14 @@ HoneySky White Board（蜜空白板）是一款面向 Windows 10/11 x64 的桌�
 - 更新检测：启动后静默检查一次（约 5 秒超时，失败自动回退镜像），有新版弹 Toast 并可打开 Release 页面；「⋯ → 检查更新」可手动检查。
 - AI 回答区字号可调（A− / 滑块 12–22 / A+），设置会记住。
 
-### v1.2.1 更新
+### v1.2.2 更新（全屏浮窗置顶、GitHub 直达、清除缓存）
+- 全屏下问 AI 等浮窗置顶优先级最高：全屏白板上打开的浮窗始终位于最上层，退出全屏后恢复普通层级。
+- 「设置 → 关于」新增 GitHub 仓库链接，点击直接用默认浏览器打开。
+- 更新检查优先访问 GitHub Releases，失败后自动切换镜像；仍失败则静默跳过。
+- 启动默认不再提示「上次未保存的文件」（可在「设置 → 常规」重新开启），Recovery 数据不会被自动删除。
+- 「设置 → 关于」新增「清除缓存」按钮：只清理 Cache 与 Thumbnails，不动文档、设置、Recovery 与日志。
+
+### v1.2.1 更新（历史）
 - 启动即全屏：打开程序直接进入全屏白板，减少一次手动切换；退出全屏时恢复窗口/最大化状态。
 - 右下翻页条「⛶」按钮可直接进入/退出全屏。
 - 页面缩略图条只显示设定数量的页面（可在设置中调整），超出部分可滚动。
@@ -79,7 +86,7 @@ HoneySky White Board（蜜空白板）是一款面向 Windows 10/11 x64 的桌�
 发布产物有三种形态，任选其一，不要同时安装 EXE 与 MSI。
 
 ### 2.1 EXE 安装包（Inno Setup）
-- 文件：dist/installer/HoneySkyWhiteBoard-1.2.1-win-x64-setup.exe
+- 文件：dist/installer/HoneySkyWhiteBoard-1.2.2-win-x64-setup.exe
 - 双击后按向导安装，默认目录为 C:\Program Files\HoneySky White Board。
 - 可选创建桌面快捷方式；开始菜单固定包含主程序与卸载入口。
 - 卸载：Windows 设置 → 应用 → HoneySky White Board → 卸载，或开始菜单中的卸载快捷方式。
@@ -87,21 +94,21 @@ HoneySky White Board（蜜空白板）是一款面向 Windows 10/11 x64 的桌�
 - 安装时注册 .hswb 文件关联（Windows 资源管理器双击白板文档即可打开），卸载时移除关联。
 
 ### 2.2 MSI 安装包（WiX）
-- 文件：dist/installer/HoneySkyWhiteBoard-1.2.1-win-x64.msi
+- 文件：dist/installer/HoneySkyWhiteBoard-1.2.2-win-x64.msi
 - 适合企业批量部署（msiexec /i 或组策略分发）。
 - 安装目录、快捷方式与卸载行为与 EXE 版一致；交互式卸载会询问是否删除用户数据。
 - 静默卸载（`msiexec /x` 不带 UI）不会弹窗，直接保留全部用户数据。
 - 同样注册 .hswb 文件关联（写入 HKLM\SOFTWARE\Classes，卸载时由 Windows Installer 移除）。
 
 ### 2.3 绿色便携版
-- 文件：dist/portable/HoneySkyWhiteBoard-1.2.1-win-x64-portable.zip
+- 文件：dist/portable/HoneySkyWhiteBoard-1.2.2-win-x64-portable.zip
 - 解压到任意可写目录（不要放在需要管理员权限的 Program Files 下），运行 HoneySkyWhiteBoard.exe。
 - 便携判定：程序目录存在 portable.marker 文件或 Data 目录时，数据写入程序目录下的 Data\。
 - 如果程序目录不可写，程序会自动回退到 %LOCALAPPDATA%\HoneySky White Board\，并在界面提示实际数据位置。
 - 也可用环境变量 HONEYSKY_DATA_DIR 指定数据目录，优先级高于便携标记。
 
 ### 2.4 关于“未知发布者”
-当前版本（1.2.1）未做代码签名，Windows SmartScreen 可能显示“Windows 已保护你的电脑”。这仅表示发布者证书缺失，不代表程序有问题。请核对官网提供的 SHA-256（dist/checksums），确认一致后点击“更多信息 → 仍要运行”。
+当前版本（1.2.2）未做代码签名，Windows SmartScreen 可能显示“Windows 已保护你的电脑”。这仅表示发布者证书缺失，不代表程序有问题。请核对官网提供的 SHA-256（dist/checksums），确认一致后点击“更多信息 → 仍要运行”。
 
 ## 3. 数据目录
 
