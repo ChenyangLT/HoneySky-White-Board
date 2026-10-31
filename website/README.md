@@ -1,4 +1,4 @@
-# HoneySky White Board · 官网静态站（v1.2.2）
+# HoneySky White Board · 官网静态站（v1.2.3）
 
 零依赖、纯静态、可直接 `file://` 双击打开的官网。所有样式/脚本/图像都是本地文件，**没有 CDN、没有 Google Fonts、没有构建步骤**。
 
@@ -22,16 +22,24 @@ website/
   python -m http.server 8080      # 然后打开 http://127.0.0.1:8080
   ```
 
-## v1.2.2 新增内容（页面上的「v1.2.2 新增」区块）
+## v1.2.3 新增内容（页面上的「v1.2.3 新增」区块）
 
-页面 `#whats-new` 用 6 张卡片（`.cards` 三列 → 两行 3+3；≤1024 两列、≤768 一列）介绍本版变化，文案键 `f6.*` 与 `n1.*`–`n6.*`（中英成对），卡片下方一行 `f6.history` 回顾 v1.2.1 的能力：
+页面 `#whats-new` 用 6 张卡片（`.cards` 三列 → 两行 3+3；≤1024 两列、≤768 一列）介绍本版变化，文案键 `f6.*` 与 `n1.*`–`n6.*`（中英成对），卡片下方一行 `f6.history` 回顾 v1.2.2 的能力：
 
-1. **全屏浮窗置顶**：真全屏下「问 AI」浮窗与主窗口一同成为置顶窗口（`Owner=MainWindow` + `Topmost`），始终盖在画布之上，不再被全屏白板压住；退出全屏自动恢复普通层级。Dock 二级面板（Popup）实测原本就在主窗之上，未改动。
-2. **关于页 GitHub 直达**：关于页作者卡片新增「GitHub 仓库」链接，`UseShellExecute` 直接用默认浏览器打开 `github.com/ChenyangLT/HoneySky-White-Board`（公开仓库只含安装包/文档/官网，不含源码）。
-3. **更新检查 GitHub 优先、镜像兜底**：源顺序 ① GitHub API（5 s）→ ② gh-proxy JSON 镜像（8 s）→ ③ gh-proxy + releases.atom（8 s）；只有直连失败才继续下一个源，直连成功时零镜像请求。
-4. **启动默认不提示恢复**：新增 `GeneralSettings.PromptRecoveryOnStartup`（默认 **false**），启动不再弹「上次有未保存的文件」；**恢复快照不会被删除**，需要时在「设置 → 常规」勾选「启动时提示恢复未保存的文档（默认关闭）」再启动即可恢复。
-5. **清除缓存按钮**：「设置 → 关于」操作行新增「清除缓存」，二次确认后只清 `AppPaths.Cache` 与 `AppPaths.Thumbnails` 的内容（保留目录），**不动** Documents / Settings / Recovery，并提示释放的字节数。
-6. **默认画笔/矩形沿用 v1.2.1**：打开仍是画笔、形状默认矩形，v1.2.1 定下的默认工具在 v1.2.2 保持不变；工具栏显示、固定与排序照旧可调。
+1. **讲台画面旋转**：讲台底部新增旋转按钮，循环 0°→90°→180°→270°；画面按旋转后的矩形等比适配，批注坐标随画面一起转，拍照 / 截图 / 问 AI 都用旋转后的画面。
+2. **触摸书写更跟手**：触摸与手写笔分通道，合并 `GetIntermediateTouchPoints` 并按 0.8 DIP 去重后再平滑；渲染合并到每帧一次（最多 60 fps），慢设备不掉帧。
+3. **双指缩放修复 + 掌压自动橡皮**：两指落下立即取消单指笔迹，缩放增量钳制在单帧 0.8–1.25；接触尺寸 ≥ 26 DIP 进临时橡皮、≤ 18 DIP 或抬起切回笔（`General.TouchPalmEraserEnabled` 默认开，设置里可关）。
+4. **导入翻页不卡 + 页面边框与翻页条**：背景栅格化移出 UI 线程（后台任务 + 版本号丢弃过期结果），内存 LRU 4 页并预取前后页；有背景时页面四周 1px 边框 + 柔和投影，下方浮动「‹ 第 x / y 页 ›」。
+5. **Dock 可调大小并显示名称**：图标下方显示功能名；`General.DockScale` 0.85–1.40（默认 1.10），设置 → 工具栏「Dock 大小」；窗口过窄时按可用宽度等比回退，不遮挡画布。
+6. **检查更新实测**：发布后用已安装的 v1.2.2 走「检查更新」，GitHub 优先、失败切镜像，成功发现并下载 1.2.3。
+
+### 许可区块调整（v1.2.3）
+
+删除原「专有商业许可，不是开源软件。」一栏：标题改为「不开源，但正式版免费使用。」（`lic.title`），正文说明源码不公开、无试用期也无付费解锁（`lic.lead`）；列表由 4 条改为 3 条 —— **免费使用 / 不开源 / 第三方组件**（`lic.l1`–`lic.l3`，`lic.l4` 已删除，`COPY` 中英同步移除，i18n 键数 113 → 112）。页脚 `foot.prop` 同步改为「不开源 · 正式版免费」/「Closed source · free to use」。
+
+### 历史：v1.2.2 新增内容
+
+v1.2.2 的 6 条仍保留在页面上（通过卡片下方 `f6.history` 一句话回顾）：全屏 AI 浮窗置顶、关于页 GitHub 直达、更新先问 GitHub、启动不弹恢复提示、一键清除缓存、默认画笔/矩形沿用 v1.2.1。
 
 ### 历史：v1.2.1 新增内容
 
@@ -90,6 +98,8 @@ v1.2.0 的 8 条能力仍在页面上（`f1`–`f5` 功能区块与下载区）�
 
 **当前 8 张的版本分布（2026-10-31 更新）**：`hero-main` / `pages` / `settings` 已换成 **v1.2.2 真机图**（同名覆盖，像素尺寸与 v1.2.1 图完全一致，`index.html` 的 `width/height` 无需改动）；`brush` / `podium` / `ai-booth` 沿用 v1.2.0；`clock` / `countdown` 沿用 v1.1.3（时间工具未改版）。8 张图都不含真实环境影像与个人信息。
 
+> **v1.2.3 没有替换任何截图**：8 张图与 `index.html` 的 `width`/`height` 一律未动。页面显示的版本号来自 HTML/COPY（对外 1.2.3），图内水印仍是 v1.2.2，属历史截图 —— 用户明确要求不要为版本号重拍。
+
 - `podium.png`：讲台讲解界面，画面是导入的照片（测试用 DOCX 排版图）与红色批注，左下角是照片 1/照片 2 缩略图、底部有「拍照」与摄像头下拉。摄像头画面仍来自 NVIDIA Broadcast 虚拟摄像头，**不包含任何真实环境影像**。
 - `ai-booth.png`：真实 DeepSeek `deepseek-flash` 回答「解方程 x²-5x+6=0」的界面，块级公式正常渲染，底部有「回答字号 A− / 滑块 / A+」与 100%，状态行显示「余额：已关闭查询」。
 
@@ -110,7 +120,7 @@ v1.2.0 的 8 条能力仍在页面上（`f1`–`f5` 功能区块与下载区）�
 
 页面暂时没有图位、可选补拍的截图：Dock 全景、6 个二级面板、关于页、导入背景（PDF/Word）、全屏状态。
 
-### 截图替换状态（v1.2.2，2026-10-31）
+### 截图替换状态（v1.2.2，2026-10-31；v1.2.3 未替换截图，本节为历史记录）
 
 **v1.2.2 已替换 `hero-main` / `pages` / `settings`，其余 5 张沿用。** 三张新图是真机截图（Lead 提供于 `artifacts/screenshots/v122-shots/`，已同名覆盖到 `assets/img/`）：
 
@@ -125,7 +135,7 @@ v1.2.0 的 8 条能力仍在页面上（`f1`–`f5` 功能区块与下载区）�
 
 > 三张新图与旧图像素完全一致（1680×1050 / 1680×1050 / 780×700），因此 `index.html` 的 `width`/`height` 未改；已同步 `settings.png` 的 alt 与 `img.settings`（明确列出「启动时提示恢复未保存的文档（默认关闭）」等新开关），并重跑 `verify-site.mjs`（PROBLEMS 0）与 `measure-shots.mjs`（无横向溢出、三图 naturalWidth>0 且 contain 未裁切）。
 
-验收截图目录：`artifacts/screenshots/v122-site/`（15 张 PNG + `_shots.json`；v1.2.2 真机原图另存于 `artifacts/screenshots/v122-shots/`）。
+验收截图目录：`artifacts/screenshots/v122-site/`（15 张 PNG + `_shots.json`；v1.2.2 真机原图另存于 `artifacts/screenshots/v122-shots/`）；v1.2.3 文案改动的复验截图在 `artifacts/screenshots/v123-site/`（15 张 PNG）。
 
 ## 文案与中英切换
 
@@ -151,7 +161,7 @@ v1.2.0 的 8 条能力仍在页面上（`f1`–`f5` 功能区块与下载区）�
 
 1. 把 `website/` 目录内容放到的 GitHub Pages 根（或仓库 `docs/` 目录）。
 2. 仓库 Settings → Pages → Source 选分支与目录即可，无需构建。
-3. 下载按钮目前统一指向 `https://github.com/ChenyangLT/HoneySky-White-Board/releases/latest`；正式发版后确认 Release 里确实带 `HoneySkyWhiteBoard-1.2.2-win-x64-setup.exe` / `-win-x64.msi` / `-win-x64-portable.zip` 与 `SHA256SUMS.txt`。
+3. 下载按钮目前统一指向 `https://github.com/ChenyangLT/HoneySky-White-Board/releases/latest`；正式发版后确认 Release 里确实带 `HoneySkyWhiteBoard-1.2.3-win-x64-setup.exe` / `-win-x64.msi` / `-win-x64-portable.zip` 与 `SHA256SUMS.txt`。
 
 ## 自检脚本（工作区 artifacts/tools/）
 
