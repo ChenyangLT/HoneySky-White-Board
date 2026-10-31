@@ -1,6 +1,6 @@
 # HoneySky White Board 部署与运维指南
 
-适用版本：1.2.0（1.0.0/1.1.0/1.1.1/1.1.2/1.1.3 升级说明见第 8 节）｜ 面向学校机房管理员、企业 IT 运维与批量部署场景 ｜ 更新日期：2026-10-31
+适用版本：1.2.1（1.0.0/1.1.0/1.1.1/1.1.2/1.1.3/1.2.0 升级说明见第 8 节）｜ 面向学校机房管理员、企业 IT 运维与批量部署场景 ｜ 更新日期：2026-10-31
 
 日常使用说明见 `docs/user-guide.md`，安装包清单与源码构建见 `README.md`。
 
@@ -38,10 +38,10 @@
 
 ```bat
 rem 静默安装到默认目录（C:\Program Files\HoneySky White Board）
-HoneySkyWhiteBoard-1.2.0-win-x64-setup.exe /VERYSILENT /SUPPRESSMSGBOXES /NORESTART /SP- /LOG="%TEMP%\hswb-install.log"
+HoneySkyWhiteBoard-1.2.1-win-x64-setup.exe /VERYSILENT /SUPPRESSMSGBOXES /NORESTART /SP- /LOG="%TEMP%\hswb-install.log"
 
 rem 指定安装目录 + 不创建桌面图标（如安装脚本提供该任务）
-HoneySkyWhiteBoard-1.2.0-win-x64-setup.exe /VERYSILENT /SUPPRESSMSGBOXES /NORESTART /DIR="D:\Apps\HoneySky White Board" /LOG="%TEMP%\hswb-install.log"
+HoneySkyWhiteBoard-1.2.1-win-x64-setup.exe /VERYSILENT /SUPPRESSMSGBOXES /NORESTART /DIR="D:\Apps\HoneySky White Board" /LOG="%TEMP%\hswb-install.log"
 ```
 
 - `/VERYSILENT` 无界面；`/SUPPRESSMSGBOXES` 不弹确认框；`/LOG=` 输出安装日志便于审计。
@@ -52,13 +52,13 @@ HoneySkyWhiteBoard-1.2.0-win-x64-setup.exe /VERYSILENT /SUPPRESSMSGBOXES /NOREST
 
 ```bat
 rem 静默安装（全机器）
-msiexec /i "HoneySkyWhiteBoard-1.2.0-win-x64.msi" /qn /norestart ALLUSERS=1 /l*v "%TEMP%\hswb-msi-install.log"
+msiexec /i "HoneySkyWhiteBoard-1.2.1-win-x64.msi" /qn /norestart ALLUSERS=1 /l*v "%TEMP%\hswb-msi-install.log"
 
 rem 静默卸载
-msiexec /x "HoneySkyWhiteBoard-1.2.0-win-x64.msi" /qn /norestart /l*v "%TEMP%\hswb-msi-uninstall.log"
+msiexec /x "HoneySkyWhiteBoard-1.2.1-win-x64.msi" /qn /norestart /l*v "%TEMP%\hswb-msi-uninstall.log"
 
 rem 仅解包（不安装），用于分发前检查文件清单
-msiexec /a "HoneySkyWhiteBoard-1.2.0-win-x64.msi" /qb TARGETDIR="D:\hswb-unpack"
+msiexec /a "HoneySkyWhiteBoard-1.2.1-win-x64.msi" /qb TARGETDIR="D:\hswb-unpack"
 ```
 
 - 退出码 `0` 成功；`3010` 成功但需要重启；`1603` 致命错误（多为权限/文件占用/安装包损坏）。
@@ -120,34 +120,40 @@ rem 只读检查（不删除任何文件），退出码 0 表示检查通过
 
 ---
 
-## 8. v1.2.0 升级部署（1.1.3 → 1.2.0；1.0.0–1.1.2 也可直接升至 1.2.0）
+## 8. v1.2.1 升级部署（1.2.0 → 1.2.1；1.0.0–1.2.0 也可直接升至 1.2.1）
 
-1.2.0 与 1.1.3/1.1.2/1.1.1/1.1.0/1.0.0 使用同一数据目录（%LOCALAPPDATA%\HoneySky White Board\）、同一 MSI UpgradeCode 与同一 Inno AppId，**升级不需要迁移数据或改设置**；.hswb 文档保持向后兼容（旧文档可直接打开，阶段 B 以实际 formatVersion 核对）。
+1.2.1 与 1.2.0/1.1.3/1.1.2/1.1.1/1.1.0/1.0.0 使用同一数据目录（%LOCALAPPDATA%\HoneySky White Board\）、同一 MSI UpgradeCode 与同一 Inno AppId，**升级不需要迁移数据或改设置**；.hswb 文档保持向后兼容（旧文档可直接打开，阶段 B 以实际 formatVersion 核对）。
 
 ### 8.1 EXE（Inno Setup）就地升级
 
 ```bat
-rem 直接运行 1.2.0 安装包覆盖安装（可覆盖 1.1.3/1.1.2/1.1.1/1.1.0/1.0.0，无需先卸载）
-HoneySkyWhiteBoard-1.2.0-win-x64-setup.exe /VERYSILENT /SUPPRESSMSGBOXES /NORESTART /SP- /LOG="%TEMP%\hswb-upgrade.log"
+rem 直接运行 1.2.1 安装包覆盖安装（可覆盖 1.2.0/1.1.3/1.1.2/1.1.1/1.1.0/1.0.0，无需先卸载）
+HoneySkyWhiteBoard-1.2.1-win-x64-setup.exe /VERYSILENT /SUPPRESSMSGBOXES /NORESTART /SP- /LOG="%TEMP%\hswb-upgrade.log"
 ```
 
 - 安装器按相同 AppId 识别旧版本并覆盖程序文件；用户数据目录不在安装目录内，升级不会删除文档、设置与缓存。
-- 升级完成后在「⋯ → 关于」应显示 1.2.0；旧 .hswb 可直接打开。
-- 回滚：卸载 1.2.0 时保留用户数据，再安装 1.1.3 包即可（1.1.3 三产物仍在 dist）；更早版本的回滚包与 SHA-256 见 dist/checksums 下的对应清单。
+- 升级完成后在「⋯ → 关于」应显示 1.2.1；旧 .hswb 可直接打开。
+- 回滚：卸载 1.2.1 时保留用户数据，再安装 1.2.0 包即可（1.2.0 三产物仍在 dist）；更早版本的回滚包与 SHA-256 见 dist/checksums 下的对应清单。
 
 ### 8.2 MSI（WiX）MajorUpgrade
 
 ```bat
-rem 直接安装 1.2.0 MSI，MajorUpgrade 自动移除旧版本（1.1.3 及更早）的 ProductCode 后再安装新版本
-msiexec /i "HoneySkyWhiteBoard-1.2.0-win-x64.msi" /qn /norestart ALLUSERS=1 /l*v "%TEMP%\hswb-msi-upgrade.log"
+rem 直接安装 1.2.1 MSI，MajorUpgrade 自动移除旧版本（1.2.0 及更早）的 ProductCode 后再安装新版本
+msiexec /i "HoneySkyWhiteBoard-1.2.1-win-x64.msi" /qn /norestart ALLUSERS=1 /l*v "%TEMP%\hswb-msi-upgrade.log"
 ```
 
-- 升级依赖 UpgradeCode {B7D41E2A-9C33-4F6B-8E21-5A0C3D9F6B14} 保持不变；1.2.0 使用新 ProductCode {76D23280-8FDB-4872-A676-FB35AFBDC8FE}（1.1.3 为 {BFDCCCFB-...}，1.1.2 为 {09C801FF-...}，1.1.1 为 {5734561E-...}）。
+- 升级依赖 UpgradeCode {B7D41E2A-9C33-4F6B-8E21-5A0C3D9F6B14} 保持不变；1.2.1 使用新 ProductCode {3F3B8A2E-5C9D-4E52-9C3A-0B7D6E1F9A24}（1.2.0 为 {76D23280-...}，1.1.3 为 {BFDCCCFB-...}，1.1.2 为 {09C801FF-...}，1.1.1 为 {5734561E-...}）。
 - 不要把不同版本/不同封装形态交叉安装（例如 EXE 装旧版、MSI 装新版会留下两套卸载信息）。
-- MSI 会阻止降级（1.2.0 已安装时再装更早版本会提示并回滚）；确需回滚先卸载 1.2.0（保留数据）再安装目标版本。
+- MSI 会阻止降级（1.2.1 已安装时再装更早版本会提示并回滚）；确需回滚先卸载 1.2.1（保留数据）再安装目标版本。
 
-### 8.3 v1.2.0 新交互对部署的影响
+### 8.3 v1.2.1 新交互对部署的影响（含 1.2.0 界面行为）
 
+- **启动即全屏**：1.2.1 启动后直接进入全屏，班级展示场景更快；需要窗口态时用顶栏「还原」或 `Esc`/`F11` 退出全屏。若机房使用窗口管理策略强制窗口尺寸，请实测是否被策略拉回窗口。
+- **翻页条全屏按钮**：右下翻页条新增全屏开关，等效 F11；不影响既有缩放与适应页面按钮。
+- **缩略图显示数量可设**：页面缩略图条只显示设定数量的页面，数量记入用户设置；还原卡/案例部署会使该设置回到默认值。
+- **工具切换修复**：橡皮与形状互切不再取消工具，属纯行为修复，无部署影响。
+- **关于页动画与水印**：品牌动画每 3 秒循环（可在设置→动画关闭）；全屏水印不拦截鼠标。
+- 1.2.0 引入的界面行为（Dock 位置记忆、启动动画 `--no-splash`、PDF/Word 导入缓存、更新检测、讲台拍照、B 站头像）仍适用，详见下方原条目。
 - 顶栏改为一行的极简栏（40px），工具收到底部 Dock；`F11` 进入全屏（隐藏顶栏，左上角显示品牌水印）。纯界面变化，不需要额外权限。
 - 底部 Dock 可左右拖动，位置写入用户设置（`General.DockOffsetRatio`，默认居中）；机房若使用桌面冻结/还原卡，用户拖动位置会被重置为默认，属预期。
 - 启动动画（420×300 启动画面）可用命令行参数 `--no-splash` 跳过，或在「设置 → 通用」关闭「显示启动动画」；慢机器上动画最长等主窗口首帧就绪，不阻塞启动。
@@ -155,15 +161,16 @@ msiexec /i "HoneySkyWhiteBoard-1.2.0-win-x64.msi" /qn /norestart ALLUSERS=1 /l*v
 - 启动后约 3 秒会静默检查一次更新（访问 `api.github.com` 的 Release 接口，5 秒超时，失败自动切换镜像并静默跳过）；内网/无外网时不影响使用，也不会自动下载或安装。若机房需要完全禁网，保持默认即可，无需特别配置。
 - 讲台拍照的照片只存在内存（单次会话最多 12 张），保存 PNG 时写入用户选择的目录（默认「文档」），不写安装目录。
 - 「设置 → 关于」页会尝试加载作者 B 站头像（外网请求，失败回退内置图标），内网环境显示内置图标属正常。
-- 1.2.0 的安装包、文档与官网同时发布在 GitHub 公开仓库（不含源码，专有许可）；企业内网无法访问 GitHub 时使用离线安装包与 SHA-256 清单校验。
+- 1.2.1 的安装包、文档与官网同时发布在 GitHub 公开仓库（不含源码，专有许可）；企业内网无法访问 GitHub 时使用离线安装包与 SHA-256 清单校验。
 
 ### 8.4 升级后检查
 
-1. 「⋯ → 关于」显示 1.2.0，数据目录正确。
+1. 「⋯ → 关于」显示 1.2.1，数据目录正确。
 2. 打开一份 1.0.0 或 1.1.x 保存的 .hswb，内容正常（旧文档按钢笔笔尖兼容读取）。
 3. 资源管理器双击 .hswb 仍能打开（文件关联未被破坏）。
-4. 旧用户数据与设置保留；卸载 1.2.0（静默）后数据仍在。
-5. 界面为 v1.2.0 新布局：顶栏一行、底部 Dock、左下页面缩略图条、右下翻页条；点 Dock 最右「⋯」可打开设置。
+4. 旧用户数据与设置保留；卸载 1.2.1（静默）后数据仍在。
+5. 界面为 v1.2.1 新布局：顶栏一行、底部 Dock、左下页面缩略图条、右下翻页条；点 Dock 最右「⋯」可打开设置。
+6. 启动即为全屏；右下翻页条的全屏按钮可切换全屏/窗口；缩略图条按设置数量显示。
 
 ---
 

@@ -650,9 +650,10 @@ code {
   gap: 20px;
 }
 
-/* v1.2.0 新增区块有 8 张卡：宽屏用 4 列（4+4），避免 3 列时第三行只剩两张、右边留大缺口。
-   ≤1024 / ≤768 由文件后部的媒体查询改回 2 列 / 1 列（同特异性、后写者胜）。 */
-.cards--four { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+/* v1.2.1 新增区块是 6 张卡，直接用上面的 3 列（3+3）；≤1024 / ≤768 的媒体查询会改成 2 列 / 1 列。 */
+
+/* 卡片下方的一行历史说明：比 .sub 更小更淡，靠左对齐。 */
+.new-history { margin-top: 28px; font-size: 14.5px; line-height: 1.6; color: var(--ink-3); max-width: 46em; }
 
 .card {
   background: var(--card);
