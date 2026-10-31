@@ -1,6 +1,6 @@
 # HoneySky White Board 1.2.4 发布说明
 
-- 发布日期：待阶段 B 构建后填写
+- 发布日期：2026-11-01
 - 版本：1.2.4（x64，Windows 10 1809 及以上 / Windows 11）
 - 上一版本：1.2.3
 
@@ -24,6 +24,10 @@
 - 启动页最短展示 3 秒（可在「设置 → 常规」调整为 3–15 秒），想马上用可点「即刻启动」。
 - 启动页新增「以后直接启动」复选框，勾选后下次不再显示启动动画。
 
+### 启动页不再闪黑（发布后修订）
+- 修复启动动画播放时四周露出黑色页面的问题：主窗口改为在屏幕外完成首帧渲染，启动页结束后再移回屏幕内，不再让黑底抢在内容前面出现。
+- 全屏启动与窗口化启动都已实测：过渡期间没有全屏黑帧，启动页关闭时主界面已就绪。
+
 ## 下载
 
 | 形态 | 文件 |
@@ -32,7 +36,16 @@
 | MSI 安装包（批量部署） | `HoneySkyWhiteBoard-1.2.4-win-x64.msi` |
 | 绿色便携版 | `HoneySkyWhiteBoard-1.2.4-win-x64-portable.zip` |
 
-- 三产物 SHA-256 见同目录 `SHA256SUMS.txt`（阶段 B 构建后生成）。
+三产物校验值（SHA-256，与同目录 SHA256SUMS.txt 一致）：
+
+| 产物 | 字节 | SHA-256 |
+| --- | --- | --- |
+| HoneySkyWhiteBoard-1.2.4-win-x64-setup.exe | 81,277,364 | 478aa616647a799c3d9419f9b7271a3e58872aa8ce6df6ec48ceca6622196c6a |
+| HoneySkyWhiteBoard-1.2.4-win-x64.msi | 90,321,004 | 0aec71cd40720d1e837f9388e5f05b4f4fc6905132a0632d758f11b096b46a7b |
+| HoneySkyWhiteBoard-1.2.4-win-x64-portable.zip | 110,769,161 | 1ddccc1ef4db94b27a1273e4c97b8db5e859a68babb86ed3cffffd5cb26f0205 |
+
+- 下载页：https://chenyanglt.github.io/HoneySky-White-Board/
+- Release 页：https://github.com/ChenyangLT/HoneySky-White-Board/releases/tag/v1.2.4
 - 本版未做代码签名，SmartScreen 提示「未知发布者」属正常现象：请先核对 SHA-256，再选择「更多信息 → 仍要运行」。
 
 ## 如何更新
