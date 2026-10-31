@@ -1,6 +1,6 @@
 # HoneySky White Board 部署与运维指南
 
-适用版本：1.1.2（1.0.0/1.1.0/1.1.1 升级说明见第 8 节）｜ 面向学校机房管理员、企业 IT 运维与批量部署场景 ｜ 更新日期：2026-10-30
+适用版本：1.2.0（1.0.0/1.1.0/1.1.1/1.1.2/1.1.3 升级说明见第 8 节）｜ 面向学校机房管理员、企业 IT 运维与批量部署场景 ｜ 更新日期：2026-10-31
 
 日常使用说明见 `docs/user-guide.md`，安装包清单与源码构建见 `README.md`。
 
@@ -38,10 +38,10 @@
 
 ```bat
 rem 静默安装到默认目录（C:\Program Files\HoneySky White Board）
-HoneySkyWhiteBoard-1.1.2-win-x64-setup.exe /VERYSILENT /SUPPRESSMSGBOXES /NORESTART /SP- /LOG="%TEMP%\hswb-install.log"
+HoneySkyWhiteBoard-1.2.0-win-x64-setup.exe /VERYSILENT /SUPPRESSMSGBOXES /NORESTART /SP- /LOG="%TEMP%\hswb-install.log"
 
 rem 指定安装目录 + 不创建桌面图标（如安装脚本提供该任务）
-HoneySkyWhiteBoard-1.1.2-win-x64-setup.exe /VERYSILENT /SUPPRESSMSGBOXES /NORESTART /DIR="D:\Apps\HoneySky White Board" /LOG="%TEMP%\hswb-install.log"
+HoneySkyWhiteBoard-1.2.0-win-x64-setup.exe /VERYSILENT /SUPPRESSMSGBOXES /NORESTART /DIR="D:\Apps\HoneySky White Board" /LOG="%TEMP%\hswb-install.log"
 ```
 
 - `/VERYSILENT` 无界面；`/SUPPRESSMSGBOXES` 不弹确认框；`/LOG=` 输出安装日志便于审计。
@@ -52,13 +52,13 @@ HoneySkyWhiteBoard-1.1.2-win-x64-setup.exe /VERYSILENT /SUPPRESSMSGBOXES /NOREST
 
 ```bat
 rem 静默安装（全机器）
-msiexec /i "HoneySkyWhiteBoard-1.1.2-win-x64.msi" /qn /norestart ALLUSERS=1 /l*v "%TEMP%\hswb-msi-install.log"
+msiexec /i "HoneySkyWhiteBoard-1.2.0-win-x64.msi" /qn /norestart ALLUSERS=1 /l*v "%TEMP%\hswb-msi-install.log"
 
 rem 静默卸载
-msiexec /x "HoneySkyWhiteBoard-1.1.2-win-x64.msi" /qn /norestart /l*v "%TEMP%\hswb-msi-uninstall.log"
+msiexec /x "HoneySkyWhiteBoard-1.2.0-win-x64.msi" /qn /norestart /l*v "%TEMP%\hswb-msi-uninstall.log"
 
 rem 仅解包（不安装），用于分发前检查文件清单
-msiexec /a "HoneySkyWhiteBoard-1.1.2-win-x64.msi" /qb TARGETDIR="D:\hswb-unpack"
+msiexec /a "HoneySkyWhiteBoard-1.2.0-win-x64.msi" /qb TARGETDIR="D:\hswb-unpack"
 ```
 
 - 退出码 `0` 成功；`3010` 成功但需要重启；`1603` 致命错误（多为权限/文件占用/安装包损坏）。
@@ -110,6 +110,7 @@ rem 只读检查（不删除任何文件），退出码 0 表示检查通过
 | 能力 | 目标 | 协议/端口 | 关闭方式 |
 | --- | --- | --- | --- |
 | 网络授时 | `ntp.aliyun.com`（SNTP）及设置中的 HTTP 时间源 | UDP 123 / HTTPS 443 | 设置 → 时钟相关开关，或断网时自动回退系统时间 |
+| 更新检测 | `api.github.com` 的 Release 接口及镜像回退 | HTTPS 443 | 全部失败时静默跳过，不影响使用；不自动下载安装 |
 | 问 AI（AI 助手）与讲台内问 AI | 用户自行配置的 OpenAI 兼容服务 BaseUrl | HTTPS 443（按 BaseUrl） | 不配置即完全不发起请求（默认状态未配置） |
 | DeepSeek 余额 | DeepSeek 官方域名（仅官方接口时） | HTTPS 443 | 设置 → AI → 关闭余额查询 |
 
@@ -119,50 +120,50 @@ rem 只读检查（不删除任何文件），退出码 0 表示检查通过
 
 ---
 
-## 8. v1.1.2 升级部署（1.1.1 → 1.1.2；1.1.0/1.0.0 可直接升至 1.1.2）
+## 8. v1.2.0 升级部署（1.1.3 → 1.2.0；1.0.0–1.1.2 也可直接升至 1.2.0）
 
-1.1.2 与 1.1.1/1.1.0/1.0.0 使用同一数据目录（%LOCALAPPDATA%\HoneySky White Board\）、同一 .hswb 格式（formatVersion 1.1 兼容读取 1.0）、同一 MSI UpgradeCode 与同一 Inno AppId，**升级不需要迁移数据或改设置**。
+1.2.0 与 1.1.3/1.1.2/1.1.1/1.1.0/1.0.0 使用同一数据目录（%LOCALAPPDATA%\HoneySky White Board\）、同一 MSI UpgradeCode 与同一 Inno AppId，**升级不需要迁移数据或改设置**；.hswb 文档保持向后兼容（旧文档可直接打开，阶段 B 以实际 formatVersion 核对）。
 
 ### 8.1 EXE（Inno Setup）就地升级
 
 ```bat
-rem 直接运行 1.1.2 安装包覆盖安装（可覆盖 1.1.1/1.1.0/1.0.0，无需先卸载）
-HoneySkyWhiteBoard-1.1.2-win-x64-setup.exe /VERYSILENT /SUPPRESSMSGBOXES /NORESTART /SP- /LOG="%TEMP%\hswb-upgrade.log"
+rem 直接运行 1.2.0 安装包覆盖安装（可覆盖 1.1.3/1.1.2/1.1.1/1.1.0/1.0.0，无需先卸载）
+HoneySkyWhiteBoard-1.2.0-win-x64-setup.exe /VERYSILENT /SUPPRESSMSGBOXES /NORESTART /SP- /LOG="%TEMP%\hswb-upgrade.log"
 ```
 
 - 安装器按相同 AppId 识别旧版本并覆盖程序文件；用户数据目录不在安装目录内，升级不会删除文档、设置与缓存。
-- 升级完成后在「设置 → 关于」应显示 1.1.2；旧 .hswb 可直接打开。
-- 回滚：卸载 1.1.2 时保留用户数据，再安装 1.1.1 包即可（1.1.1 三产物仍在 dist）；如需退回 1.1.0/1.0.0，回滚包与 SHA-256 见 dist/checksums 下的对应清单。
+- 升级完成后在「⋯ → 关于」应显示 1.2.0；旧 .hswb 可直接打开。
+- 回滚：卸载 1.2.0 时保留用户数据，再安装 1.1.3 包即可（1.1.3 三产物仍在 dist）；更早版本的回滚包与 SHA-256 见 dist/checksums 下的对应清单。
 
 ### 8.2 MSI（WiX）MajorUpgrade
 
 ```bat
-rem 直接安装 1.1.2 MSI，MajorUpgrade 自动移除旧版本（1.1.1/1.1.0/1.0.0）的 ProductCode 后再安装新版本
-msiexec /i "HoneySkyWhiteBoard-1.1.2-win-x64.msi" /qn /norestart ALLUSERS=1 /l*v "%TEMP%\hswb-msi-upgrade.log"
+rem 直接安装 1.2.0 MSI，MajorUpgrade 自动移除旧版本（1.1.3 及更早）的 ProductCode 后再安装新版本
+msiexec /i "HoneySkyWhiteBoard-1.2.0-win-x64.msi" /qn /norestart ALLUSERS=1 /l*v "%TEMP%\hswb-msi-upgrade.log"
 ```
 
-- 升级依赖 UpgradeCode {B7D41E2A-9C33-4F6B-8E21-5A0C3D9F6B14} 保持不变；1.1.2 使用新 ProductCode {09C801FF-C5BB-4E56-8E3C-4B0D658EE0F1}（1.1.1 为 {5734561E-A419-4315-B47C-9D7D3EAB99E6}）。
+- 升级依赖 UpgradeCode {B7D41E2A-9C33-4F6B-8E21-5A0C3D9F6B14} 保持不变；1.2.0 使用新 ProductCode {76D23280-8FDB-4872-A676-FB35AFBDC8FE}（1.1.3 为 {BFDCCCFB-...}，1.1.2 为 {09C801FF-...}，1.1.1 为 {5734561E-...}）。
 - 不要把不同版本/不同封装形态交叉安装（例如 EXE 装旧版、MSI 装新版会留下两套卸载信息）。
-- MSI 会阻止降级（1.1.2 已安装时再装 1.1.1/1.1.0/1.0.0 会提示并回滚）；确需回滚先卸载 1.1.2（保留数据）再安装目标版本。
+- MSI 会阻止降级（1.2.0 已安装时再装更早版本会提示并回滚）；确需回滚先卸载 1.2.0（保留数据）再安装目标版本。
 
-### 8.3 v1.1/v1.1.2 新交互对部署的影响
+### 8.3 v1.2.0 新交互对部署的影响
 
-- 主窗口改为无边框全屏启动（WindowChrome），按 F11 切换沉浸模式（隐藏顶栏）；不需要额外的窗口管理权限。
-- 底部控制栏常驻，页面栏自动隐藏（左侧热区滑入），浮动工具条可拖动且位置写入用户设置；这些只影响界面，不改变安装/数据路径。
-- 「AI 讲台」会调用摄像头：如学校策略禁用摄像头，Windows 设置 → 隐私 → 相机中需允许桌面应用访问；无摄像头时界面显示中文提示，不会崩溃。
-- 「问 AI」与讲台提问沿用用户自备的 OpenAI 兼容服务，部署时仍需在设置 → AI 服务配置 BaseUrl/Model/Key；未配置时不发起任何网络请求。
-- AI 请求改为分段超时（连接 15 秒 / 首 token 60 秒 / 流式空闲 60 秒 / 总时长默认不限），弱网环境比 1.0.0 的单次 120 秒总超时更可控。
-- 1.1.1 起默认模型为 `deepseek-flash`（支持图片输入）；`deepseek-v4-pro` 仅文本，配置该模型时发送图片会被服务端静默忽略（不报错，见交付报告已知限制）。
-- v1.1.2 起时钟/倒计时改为独立置顶窗口：窗口大小随字号缩放（0.7–2.4 倍）、背景透明度 10%–100% 可调、位置与设置持久化到用户设置；不需要额外权限，也不会写入安装目录。若机房使用桌面冻结/还原卡，时钟窗口位置会被重置为默认，属预期。
-- 1.1.2 的安装包、文档与官网同时发布在 GitHub 公开仓库（不含源码，专有许可）；企业内网无法访问 GitHub 时使用离线安装包与 SHA-256 清单校验。
+- 顶栏改为一行的极简栏（40px），工具收到底部 Dock；`F11` 进入全屏（隐藏顶栏，左上角显示品牌水印）。纯界面变化，不需要额外权限。
+- 底部 Dock 可左右拖动，位置写入用户设置（`General.DockOffsetRatio`，默认居中）；机房若使用桌面冻结/还原卡，用户拖动位置会被重置为默认，属预期。
+- 启动动画（420×300 启动画面）可用命令行参数 `--no-splash` 跳过，或在「设置 → 通用」关闭「显示启动动画」；慢机器上动画最长等主窗口首帧就绪，不阻塞启动。
+- 导入 PDF/Word 会把渲染后的背景位图缓存到 `%LOCALAPPDATA%\HoneySky White Board\Cache\import\`；大文件（>200 页）只渲染当前页附近。部署时按用户文档量预留磁盘（单页位图约数 MB，可在数据目录中清理）。
+- 启动后约 3 秒会静默检查一次更新（访问 `api.github.com` 的 Release 接口，5 秒超时，失败自动切换镜像并静默跳过）；内网/无外网时不影响使用，也不会自动下载或安装。若机房需要完全禁网，保持默认即可，无需特别配置。
+- 讲台拍照的照片只存在内存（单次会话最多 12 张），保存 PNG 时写入用户选择的目录（默认「文档」），不写安装目录。
+- 「设置 → 关于」页会尝试加载作者 B 站头像（外网请求，失败回退内置图标），内网环境显示内置图标属正常。
+- 1.2.0 的安装包、文档与官网同时发布在 GitHub 公开仓库（不含源码，专有许可）；企业内网无法访问 GitHub 时使用离线安装包与 SHA-256 清单校验。
 
 ### 8.4 升级后检查
 
-1. 设置 → 关于显示 1.1.2，数据目录正确。
-2. 打开一份 1.0.0 保存的 .hswb，内容正常（旧文档按钢笔笔尖兼容读取）。
+1. 「⋯ → 关于」显示 1.2.0，数据目录正确。
+2. 打开一份 1.0.0 或 1.1.x 保存的 .hswb，内容正常（旧文档按钢笔笔尖兼容读取）。
 3. 资源管理器双击 .hswb 仍能打开（文件关联未被破坏）。
-4. 旧用户数据与设置保留；卸载 1.1.2（静默）后数据仍在。
-5. 打开「时钟」确认独立窗口出现、可拖动/缩放字号/调透明度，重启后恢复上次位置。
+4. 旧用户数据与设置保留；卸载 1.2.0（静默）后数据仍在。
+5. 界面为 v1.2.0 新布局：顶栏一行、底部 Dock、左下页面缩略图条、右下翻页条；点 Dock 最右「⋯」可打开设置。
 
 ---
 

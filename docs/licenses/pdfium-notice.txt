@@ -1,0 +1,9 @@
+# PDFium 本机库许可说明
+
+- 组件：PDFium 本机库（Windows x64 动态库 `pdfium.dll`）
+- 分发途径：NuGet 包 `bblanchon.PDFium.Win32` 130.0.6721（由 PDFtoImage 4.1.1 依赖引入）
+- 打包方：Benoit Blanchon，项目 https://github.com/bblanchon/pdfium-binaries
+- 打包方声明许可证：Apache-2.0（版权：Copyright © Benoit Blanchon 2017-2024），全文见 `Apache-2.0.txt`
+- 上游库：PDFium（https://pdfium.googlesource.com/pdfium/），版权归 The PDFium Authors 及 Chromium 第三方组件作者所有，以 BSD-3-Clause 分发，全文见 `BSD-3-Clause.txt`
+- 说明：`bblanchon.PDFium.Win32` 只是把上游 PDFium 预编译为 .NET 可用的 NuGet 包，未修改库本身；本软件通过 PDFtoImage 调用它把 PDF 每页渲染为位图，属于「以动态库方式使用、未修改上游源码」。
+- 合规要点：随安装包分发时保留本说明与 `Apache-2.0.txt`、`BSD-3-Clause.txt`；不修改 `pdfium.dll` 文件名与内部导出，如需替换请使用与 PDFtoImage 4.1.1 兼容的 PDFium 130.x 构建。

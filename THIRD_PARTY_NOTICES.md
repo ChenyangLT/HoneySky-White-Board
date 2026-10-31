@@ -1,6 +1,6 @@
 # 第三方组件与许可声明（THIRD_PARTY NOTICES）
 
-HoneySky White Board 1.0（下称“本软件”）由 Chen_yang_LT 发布，包含下列第三方开源软件。各组件版权归其各自作者所有，并按下列许可证分发。完整许可证原文位于 docs/licenses/ 目录，本文件随安装包一起分发。
+HoneySky White Board 1.2.0（下称“本软件”）由 Chen_yang_LT 发布，包含下列第三方开源软件。各组件版权归其各自作者所有，并按下列许可证分发。完整许可证原文位于 docs/licenses/ 目录，本文件随安装包一起分发。
 
 ## 1. 随程序分发的运行时组件
 
@@ -18,6 +18,11 @@ HoneySky White Board 1.0（下称“本软件”）由 Chen_yang_LT 发布，包
 | WpfMath 随附字体（Computer Modern 等） | 随 WpfMath 2.1.0 | SIL OFL 1.1 | 公式字体 | docs/licenses/OFL-1.1.txt、docs/licenses/wpfmath-font-licenses.md |
 | XamlMath.Shared | 随 WpfMath 2.1.0 | MIT | WpfMath 的数学排版依赖库 | docs/licenses/MIT.txt |
 | Markdig | 1.5.1 | BSD-2-Clause | Markdown 解析 | docs/licenses/BSD-2-Clause.txt |
+| PDFtoImage | 4.1.1 | MIT | PDF 逐页渲染为位图（v1.2.0 导入功能） | docs/licenses/pdftoimage-license.txt |
+| bblanchon.PDFium.Win32 | 130.0.6721 | Apache-2.0（打包方）；PDFium 上游为 BSD-3-Clause | PDF 渲染本机库 pdfium.dll（经 PDFtoImage 引入） | docs/licenses/pdfium-notice.txt、docs/licenses/Apache-2.0.txt、docs/licenses/BSD-3-Clause.txt |
+| DocumentFormat.OpenXml | 3.5.1 | MIT | 读取 .docx 文本（v1.2.0 导入功能） | docs/licenses/openxml-license.txt |
+| DocumentFormat.OpenXml.Framework | 3.5.1 | MIT | Open XML SDK 依赖库 | docs/licenses/openxml-license.txt |
+| SkiaSharp.NativeAssets.Win32 | 2.88.8 | MIT（含第三方声明） | PDFtoImage 依赖的 Skia 本机库（与上文 2.88.9 同一组件族） | docs/licenses/skiasharp-third-party-notices.txt |
 | Microsoft .NET 8 运行时（Microsoft.NETCore.App / Microsoft.WindowsDesktop.App） | 8.0.x | MIT | 自包含运行时 | docs/licenses/MIT.txt |
 
 ## 2. 仅用于测试、不随安装包分发的组件
@@ -52,7 +57,16 @@ WpfMath 随附的 Computer Modern 系列字体按 SIL Open Font License 1.1 分�
 
 OpenCvSharp4.runtime.win 4.10.0.20240616 随包附带 `opencv_videoio_ffmpeg4100_64.dll`，这是 OpenCV 官方构建的 FFmpeg 视频读写后端，基于 FFmpeg 并以 GNU Lesser General Public License 2.1（LGPL-2.1）分发。本软件未修改该 DLL，仅以独立动态库形式随 OpenCV 一起分发；其源码可从 https://ffmpeg.org/ 与 OpenCV 官方发布获取。LGPL-2.1 全文见 docs/licenses/LGPL-2.1.txt。用户可自行替换该动态库，只要替换版本与 OpenCV 4.10 的 videoio 接口兼容。
 
-## 8. 免责与合规
+## 8. PDF / Word 导入相关组件（v1.2.0 新增）
+
+v1.2.0 起支持把 PDF、Word（.docx）与图片作为页面背景导入：
+
+- **PDF 渲染**：通过 PDFtoImage 4.1.1（MIT，作者 David Sungaila，https://github.com/sungaila/PDFtoImage ）调用 PDFium 本机库 `pdfium.dll`。`pdfium.dll` 由 NuGet 包 `bblanchon.PDFium.Win32` 130.0.6721 分发（打包方 Benoit Blanchon，声明 Apache-2.0），上游 PDFium（Chromium PDFium，https://pdfium.googlesource.com/pdfium/ ）以 BSD-3-Clause 分发。本软件未修改该库，仅以动态库形式调用；许可证原文：docs/licenses/pdfium-notice.txt、docs/licenses/Apache-2.0.txt、docs/licenses/BSD-3-Clause.txt。
+- **Word 文本提取**：通过 DocumentFormat.OpenXml 3.5.1 及其依赖库 DocumentFormat.OpenXml.Framework 3.5.1（均为 MIT，Microsoft，https://github.com/dotnet/Open-XML-SDK ）读取 .docx 段落文本，再由本软件自行排版渲染为页面背景。许可证原文：docs/licenses/openxml-license.txt。
+- 上述组件仅在用户主动导入 PDF/Word 时被调用，不联网、不上传文档内容；导入的位图缓存写入本机数据目录 `Cache\import\`，可由用户清理。
+- 合规：随安装包/绿色版分发时必须保留本节与对应许可证原文；如未来升级这些组件，需同步更新版本号与本文件。
+
+## 9. 免责与合规
 
 - 本软件按“原样”提供，不附带任何明示或默示担保；第三方组件同样按其自身许可证分发。
 - 如需重新分发本软件，必须保留本文件与 docs/licenses/ 目录下的全部许可文本。

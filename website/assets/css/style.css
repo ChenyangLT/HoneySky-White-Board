@@ -446,7 +446,8 @@ code {
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.06), 0 40px 90px rgba(0, 0, 0, 0.16);
 }
 
-/* 小尺寸面板（笔二级菜单 320×300）：白色画框 + 限制显示宽度，避免被放大发虚；
+/* 小尺寸面板（笔二级面板 320×402，竖版）：白色画框 + 限制显示宽度，避免被放大发虚；
+   画框不写死高度，竖版图会按自身比例向下伸展（不裁切、不压扁）；
    画框与截图底色一致，视觉上像一个浮在白色之上的面板，而不是「卡片套卡片」 */
 .shot--panel {
   width: 100%;
@@ -633,16 +634,25 @@ code {
 }
 
 /* 两列等高画框：比例按每组截图的形状取，图片 contain 呈现（不裁切、不变形） */
-.duo--time .shot,
 .duo--work .shot { --shot-ar: 4 / 3; }
 
 .duo--ai .shot { --shot-ar: 3 / 2; }
+
+/* 时钟 / 倒计时两张截图的宽高比差别很大（511x310 ≈ 1.65 与 515x435 ≈ 1.18），直接套 4/3
+   会让其中一张左右或上下空出一大块，两列还会一高一矮、图注错位。这里取 1.27 作为平衡值：
+   按 544 宽的画框算，两张图 contain 之后各自的留白都约 15%，且留白是画框的白底，
+   在白画布截图上完全看不出来，两列仍然等高、图注对齐。 */
+.duo--time .shot { --shot-ar: 1.27; }
 
 .cards {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 20px;
 }
+
+/* v1.2.0 新增区块有 8 张卡：宽屏用 4 列（4+4），避免 3 列时第三行只剩两张、右边留大缺口。
+   ≤1024 / ≤768 由文件后部的媒体查询改回 2 列 / 1 列（同特异性、后写者胜）。 */
+.cards--four { grid-template-columns: repeat(4, minmax(0, 1fr)); }
 
 .card {
   background: var(--card);
@@ -819,6 +829,8 @@ code {
 .cards.reveal.is-visible > :nth-child(4), .specs.reveal.is-visible > :nth-child(4) { transition-delay: 0.21s; }
 .cards.reveal.is-visible > :nth-child(5) { transition-delay: 0.28s; }
 .cards.reveal.is-visible > :nth-child(6) { transition-delay: 0.35s; }
+.cards.reveal.is-visible > :nth-child(7) { transition-delay: 0.42s; }
+.cards.reveal.is-visible > :nth-child(8) { transition-delay: 0.49s; }
 
 /* ---------- 响应式 ---------- */
 @media (max-width: 1024px) {
