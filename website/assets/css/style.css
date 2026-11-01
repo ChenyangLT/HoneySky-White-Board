@@ -160,16 +160,14 @@ code {
   width: 24px;
   height: 24px;
   border-radius: 7px;
-  background: linear-gradient(160deg, #f7b45a, var(--honey) 55%, var(--honey-strong));
-  color: #fff;
-  font-size: 14px;
-  font-weight: 700;
-  line-height: 24px;
-  text-align: center;
-  box-shadow: 0 2px 6px rgba(224, 138, 30, 0.35);
+  /* v1.2.5：品牌图统一为 assets/img/icon-1024.png（蓝色带笔图标），不再用蜂蜜色底 + 白 H */
+  display: block;
+  flex: 0 0 auto;
+  object-fit: cover;
+  box-shadow: 0 2px 6px rgba(15, 35, 70, 0.22);
 }
 
-.brand__mark--sm { width: 20px; height: 20px; line-height: 20px; font-size: 12px; border-radius: 6px; }
+.brand__mark--sm { width: 20px; height: 20px; border-radius: 6px; }
 
 .nav__links {
   display: flex;
@@ -644,13 +642,16 @@ code {
    在白画布截图上完全看不出来，两列仍然等高、图注对齐。 */
 .duo--time .shot { --shot-ar: 1.27; }
 
+/* v1.2.5：启动页 440×392 与关于页 780×700 比例接近（约 1.12），同一画框比例即可，contain 不裁切 */
+.duo--v125 .shot { --shot-ar: 1.12; }
+
 .cards {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 20px;
 }
 
-/* v1.2.4 新增区块是 6 张卡，直接用上面的 3 列（3+3）；≤1024 / ≤768 的媒体查询会改成 2 列 / 1 列。 */
+/* v1.2.5 新增区块是 8 张卡，直接用上面的 3 列（3+3+2）；≤1024 / ≤768 的媒体查询会改成 2 列 / 1 列。 */
 
 /* 卡片下方的一行历史说明：比 .sub 更小更淡，靠左对齐。 */
 .new-history { margin-top: 28px; font-size: 14.5px; line-height: 1.6; color: var(--ink-3); max-width: 46em; }
