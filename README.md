@@ -2,7 +2,7 @@
 
 HoneySky White Board（蜜空白板）是一款面向 Windows 10/11 x64 的桌面白板软件，用于在线授课、讲解、会议板书与个人草稿。它提供无限画布上的压感书写、屏幕直尺与圆规、时钟倒计时、摄像头与截图、以及可对接任意 OpenAI 兼容服务的 AI 讲解面板。
 
-- 版本：1.2.6
+- 版本：1.2.6.1
 - 平台：Windows 10 1809（10.0.17763）及以上，仅 x64
 - 技术栈：C# / .NET 8 / WPF / SkiaSharp / MessagePack
 - 开发者：Chen_yang_LT
@@ -61,6 +61,15 @@ HoneySky White Board（蜜空白板）是一款面向 Windows 10/11 x64 的桌�
 - 讲台拍照：拍照后进入图片讲解模式，最多缓存 12 张可切换；支持对比（仅原图 / 仅批注 / 叠加 50% / 按住看原图）与保存合成 PNG（默认存入文档目录）。
 - 更新检测：启动后静默检查一次（约 5 秒超时，失败自动回退镜像），有新版弹 Toast 并可打开 Release 页面；「⋯ → 检查更新」可手动检查；更新弹窗与关于页可选择更新源（自动镜像优先 / GitHub 官方 / gh-proxy.com / ghproxy.net）。
 - AI 回答区字号可调（A− / 滑块 12–22 / A+），设置会记住。
+
+### v1.2.6.1 更新（讲台缩放与相册合并、照片默认不落盘、置顶策略、10 页签设置）
+- 讲台画面缩放 +/- 按钮，显示当前倍数，可一键重置（1.0–6.0）。
+- 照片条目与「▾」入口合并进相册，去掉独立照片条与照片面板；相册面板改为常驻，仅点右上角 ×、最小化或退出讲台才关闭。
+- 最小化与退出讲台按钮移到下方底栏最右侧。
+- 展台笔/橡皮沿用白板六种笔形，默认整笔擦除；可在「设置 → 展台」选择跟随白板或单独指定。
+- 照片默认不保存到磁盘，只在本次讲台会话保留；可在「设置 → 展台」打开保存并设置保留天数（默认 1 天，1–30 天）。
+- 白板/讲台/AI 不再常驻置顶，只在打开或启动时激活到最前；时钟/倒计时仍始终置顶直到关闭。
+- 设置界面从 7 个页签细化为 10 个页签，新增「展台」「更新」页。
 
 ### v1.2.6 更新（讲台影像与相册、书写性能、三种新笔尖、更新源）
 - AI 讲台影像增强：采集分辨率 640×480 / 720p / 1080p / 1440p / 设备默认；显示分辨率 720p / 1080p / 1440p / 原始长边；色温 2000–10000K、饱和度 0–200%、对比度与亮度 50–150% 可调可重置，设置持久化。
@@ -121,7 +130,7 @@ HoneySky White Board（蜜空白板）是一款面向 Windows 10/11 x64 的桌�
 发布产物有三种形态，任选其一，不要同时安装 EXE 与 MSI。
 
 ### 2.1 EXE 安装包（Inno Setup）
-- 文件：dist/installer/HoneySkyWhiteBoard-1.2.6-win-x64-setup.exe
+- 文件：dist/installer/HoneySkyWhiteBoard-1.2.6.1-win-x64-setup.exe
 - 双击后按向导安装，默认目录为 C:\Program Files\HoneySky White Board。
 - 可选创建桌面快捷方式；开始菜单固定包含主程序与卸载入口。
 - 卸载：Windows 设置 → 应用 → HoneySky White Board → 卸载，或开始菜单中的卸载快捷方式。
@@ -129,21 +138,21 @@ HoneySky White Board（蜜空白板）是一款面向 Windows 10/11 x64 的桌�
 - 安装时注册 .hswb 文件关联（Windows 资源管理器双击白板文档即可打开），卸载时移除关联。
 
 ### 2.2 MSI 安装包（WiX）
-- 文件：dist/installer/HoneySkyWhiteBoard-1.2.6-win-x64.msi
+- 文件：dist/installer/HoneySkyWhiteBoard-1.2.6.1-win-x64.msi
 - 适合企业批量部署（msiexec /i 或组策略分发）。
 - 安装目录、快捷方式与卸载行为与 EXE 版一致；交互式卸载会询问是否删除用户数据。
 - 静默卸载（`msiexec /x` 不带 UI）不会弹窗，直接保留全部用户数据。
 - 同样注册 .hswb 文件关联（写入 HKLM\SOFTWARE\Classes，卸载时由 Windows Installer 移除）。
 
 ### 2.3 绿色便携版
-- 文件：dist/portable/HoneySkyWhiteBoard-1.2.6-win-x64-portable.zip
+- 文件：dist/portable/HoneySkyWhiteBoard-1.2.6.1-win-x64-portable.zip
 - 解压到任意可写目录（不要放在需要管理员权限的 Program Files 下），运行 HoneySkyWhiteBoard.exe。
 - 便携判定：程序目录存在 portable.marker 文件或 Data 目录时，数据写入程序目录下的 Data\。
 - 如果程序目录不可写，程序会自动回退到 %LOCALAPPDATA%\HoneySky White Board\，并在界面提示实际数据位置。
 - 也可用环境变量 HONEYSKY_DATA_DIR 指定数据目录，优先级高于便携标记。
 
 ### 2.4 关于“未知发布者”
-当前版本（1.2.6）未做代码签名，Windows SmartScreen 可能显示“Windows 已保护你的电脑”。这仅表示发布者证书缺失，不代表程序有问题。请核对官网提供的 SHA-256（dist/checksums），确认一致后点击“更多信息 → 仍要运行”。
+当前版本（1.2.6.1）未做代码签名，Windows SmartScreen 可能显示“Windows 已保护你的电脑”。这仅表示发布者证书缺失，不代表程序有问题。请核对官网提供的 SHA-256（dist/checksums），确认一致后点击“更多信息 → 仍要运行”。
 
 ## 3. 数据目录
 

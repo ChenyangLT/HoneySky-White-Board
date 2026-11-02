@@ -1,3 +1,3 @@
-15944a941c58d495cc594cf5251a499d2434f72b9fe6be7d3147bb447c445924  installer\HoneySkyWhiteBoard-1.2.6-win-x64.msi
-aa965916a0177d46b791342451bc73d05bb04f54ece7f83cfb78b22eac0cdb6a  portable\HoneySkyWhiteBoard-1.2.6-win-x64-portable.zip
-e74858784ace48e730720e08a649a29873eb6601bf20e085da39baff200ff3ab  installer\HoneySkyWhiteBoard-1.2.6-win-x64-setup.exe
+b528fcb4369b0d5e14ea0abc4287ed92ecb46240bd36bb88dd9f8e5713e753ea  installer\HoneySkyWhiteBoard-1.2.6.1-win-x64.msi
+53f01feaf59eb5edcaddac2283d892fa397f2fb158334ad90bd267cdeb37398e  portable\HoneySkyWhiteBoard-1.2.6.1-win-x64-portable.zip
+f6382f6d624ebf9f837c4cc1ac8c9fa8c70cf29469c6a77e4640e9b669f48a0e  installer\HoneySkyWhiteBoard-1.2.6.1-win-x64-setup.exe

@@ -1,6 +1,6 @@
 # HoneySky White Board 部署与运维指南
 
-适用版本：1.2.6（1.0.0–1.2.5 升级说明见第 8 节）｜ 面向学校机房管理员、企业 IT 运维与批量部署场景 ｜ 更新日期：2026-11-02
+适用版本：1.2.6.1（1.0.0–1.2.6 升级说明见第 8、9 节）｜ 面向学校机房管理员、企业 IT 运维与批量部署场景 ｜ 更新日期：2026-11-03
 
 日常使用说明见 `docs/user-guide.md`，安装包清单与源码构建见 `README.md`。
 
@@ -120,11 +120,47 @@ rem 只读检查（不删除任何文件），退出码 0 表示检查通过
 
 ---
 
-## 8. v1.2.6 升级部署（1.2.5 → 1.2.6；1.0.0–1.2.5 也可直接升至 1.2.6）
+## 8. v1.2.6.1 升级部署（1.2.6 → 1.2.6.1；1.0.0–1.2.6 也可直接升至 1.2.6.1）
+
+### 8.1 版本号规则（四段版本，务必注意）
+- 1.2.6.1 是四段版本：AssemblyVersion / FileVersion 只接受 4 段，即 1.2.6.1（写成 1.2.6.1.0 会编译失败 CS7034）。
+- Inno Setup 的 VersionInfoVersion 支持 1–4 段，1.2.6.1 原样写入安装包版本信息。
+- **Windows Installer 只比较版本前三段**：1.2.6 与 1.2.6.1 在 MSI 看来是同一版本，覆盖安装依赖既有的 AllowSameVersionUpgrades="yes"。因此不要用 MSI 版本号判断“1.2.6.1 比 1.2.6 新”，也不要指望 MSI 会拦下 1.2.6.1 → 1.2.6 的降级。
+- ProductCode 每版唯一（1.2.6.1 为 {278E9BFD-8116-4878-9EA2-7733D6C44432}），UpgradeCode {B7D41E2A-9C33-4F6B-8E21-5A0C3D9F6B14} 与 Inno AppId {A8E3F1C7-5B2D-4E9A-8C61-7F0B92D4E3A5} 保持不变。
+
+### 8.2 EXE 就地升级
+```
+HoneySkyWhiteBoard-1.2.6.1-win-x64-setup.exe /VERYSILENT /SUPPRESSMSGBOXES /NORESTART /LOG="%TEMP%\hswb-upgrade-1261.log"
+```
+- 同一 AppId 就地覆盖，安装目录、快捷方式、.hswb 关联保持；用户数据目录默认不动。
+- 静默卸载（/VERYSILENT）不弹清理对话框，直接保留 %LOCALAPPDATA%\HoneySky White Board 全部数据。
+
+### 8.3 MSI 部署
+```
+msiexec /i "HoneySkyWhiteBoard-1.2.6.1-win-x64.msi" /qn /norestart /l*v "%TEMP%\hswb-msi-1261.log"
+```
+- 与 1.2.6 同 UpgradeCode：新 ProductCode 注册、旧 ProductCode 注销（MajorUpgrade afterInstallInitialize）。
+- 不要在同一台机器上同时用 EXE 与 MSI 安装；切换形态先卸载其中一种。
+- 域环境批量推送请先小范围验证 8.1 的版本比较规则，避免误判“同版本不升级”。
+
+### 8.4 本版行为变化对部署的影响
+- **置顶策略**：白板、讲台、AI 不再常驻置顶。机房若依赖“白板永远在最前”，需要接受窗口可被其他程序遮挡；时钟/倒计时仍始终置顶。
+- **讲台照片默认不落盘**：默认不在磁盘留下照片。需要跨会话保留时，在「设置 → 展台」打开保存并设置保留天数（默认 1 天，1–30）；批量部署可预置 settings.json 中 Podium.SaveAlbumToDisk=true 与 Podium.AlbumRetentionDays。
+- **设置界面 7 → 10 页签**：新增「展台」「更新」页；依赖设置窗口坐标或页签序号的自动化脚本需更新。
+- 文件格式、数据目录、卸载保留策略、.hswb 关联均无变化。
+
+### 8.5 升级后检查
+1. 帮助/关于显示 1.2.6.1。
+2. 打开一份旧 .hswb 确认可正常显示与保存。
+3. .hswb 双击仍能打开（关联未丢）。
+4. 讲台：缩放按钮可用；拍照后相册可打开且点空白不关闭；最小化/退出在底栏最右。
+5. 「设置」应有 10 个页签，含「展台」「更新」。
+
+## 9. v1.2.6 升级部署（历史，1.2.5 → 1.2.6；1.0.0–1.2.5 也可直接升至 1.2.6）
 
 1.2.6 与 1.2.5/1.2.4/1.2.3/1.2.2/1.2.1/1.2.0/1.1.3/1.1.2/1.1.1/1.1.0/1.0.0 使用同一数据目录（%LOCALAPPDATA%\HoneySky White Board\）、同一 MSI UpgradeCode 与同一 Inno AppId，升级不需要迁移数据或改设置；.hswb 保持向后兼容（1.2.6 为 BrushTip 追加直线笔/水彩/粉笔三种新笔型，旧版本读取按默认笔型渲染；格式版本号以阶段 B 实测为准）。
 
-### 8.1 EXE（Inno Setup）就地升级
+### 9.1 EXE（Inno Setup）就地升级
 
 ```bat
 rem 直接运行 1.2.6 安装包覆盖安装（可覆盖 1.2.5 及更早版本，无需先卸载）
@@ -135,7 +171,7 @@ HoneySkyWhiteBoard-1.2.6-win-x64-setup.exe /VERYSILENT /SUPPRESSMSGBOXES /NOREST
 - 升级完成后在「⋯ → 关于」应显示 1.2.6；旧 .hswb 可直接打开（旧笔型笔迹按原样渲染）。
 - 回滚：卸载 1.2.6 时保留用户数据，再安装 1.2.5 包即可（1.2.5 三产物仍在 dist）；更早版本的回滚包与 SHA-256 见 dist/checksums 下的对应清单。
 
-### 8.2 MSI（WiX）MajorUpgrade
+### 9.2 MSI（WiX）MajorUpgrade
 
 ```bat
 rem 直接安装 1.2.6 MSI，MajorUpgrade 自动移除旧版本（1.2.5 及更早）的 ProductCode 后再安装新版本
@@ -146,7 +182,7 @@ msiexec /i "HoneySkyWhiteBoard-1.2.6-win-x64.msi" /qn /norestart ALLUSERS=1 /l*v
 - 不要把不同版本或不同封装形态交叉安装（例如 EXE 装旧版、MSI 装新版会留下两套卸载信息）。
 - MSI 会阻止降级（1.2.6 已安装时再装更早版本会提示并回滚）；确需回滚先卸载 1.2.6（保留数据）再安装目标版本。
 
-### 8.3 v1.2.6 新增行为对部署的影响
+### 9.3 v1.2.6 新增行为对部署的影响
 
 - **AI 讲台影像参数与相册**：采集/显示分辨率、色温、饱和度、对比度、亮度与缩放均为本地设置，保存在 settings.json 的 Podium 节点，不联网；讲台相册默认落盘到 %LOCALAPPDATA%\HoneySky White Board\Cache\PodiumAlbum（最多 24 张，可在设置调整），卸载清理选项按 Cache 子目录处理，默认卸载仍保留。
 - **书写性能与笔画算法**：新增「设置 → 常规 → 笔画算法」（自动 / 流畅优先 / 平衡 / 画质优先）与低配模式开关。机房一体机若帧率不足，建议统一设为「流畅优先」或启用低配模式；这两项只影响渲染与动画，不改变文档内容。
@@ -157,7 +193,7 @@ msiexec /i "HoneySkyWhiteBoard-1.2.6-win-x64.msi" /qn /norestart ALLUSERS=1 /l*v
 - **更新源可选**：更新弹窗与关于页新增更新源选择（自动 / GitHub 官方 / gh-proxy.com / ghproxy.net）。若机构只允许特定出口，请统一选择「GitHub 官方」，避免走第三方镜像；自动模式在 GitHub 不可达时会按顺序尝试镜像。
 - **其他**：更新下载与断点续传、即刻更新、.hswb 关联、卸载数据保留策略与 1.2.5 一致；数据目录结构未变。
 
-### 8.4 v1.2.5 新增行为对部署的影响（历史）
+### 9.4 v1.2.5 新增行为对部署的影响（历史）
 
 - **PPT / PPTX 导入依赖本机 PowerPoint**：导入 .ppt/.pptx 时程序调用本机 Microsoft PowerPoint COM 导出 PDF。机房如需该功能，请确认已安装桌面版 Office PowerPoint；未安装时导入会给出中文提示，其余功能不受影响。纯 WPS 环境未验证。
 - **Word 导入改为懒加载**：导入后按访问页生成位图并缓存到 Cache\import\ 下。首次翻到未渲染页可能短暂显示渲染中，属预期；磁盘占用随访问页数增长，可在「设置 → 关于 → 清除缓存」清理（只清 Cache 与 Thumbnails，不动文档与设置）。
@@ -167,7 +203,7 @@ msiexec /i "HoneySkyWhiteBoard-1.2.6-win-x64.msi" /qn /norestart ALLUSERS=1 /l*v
 - **对象锁定与右键菜单**：均为本地交互，不写注册表、不联网；锁定状态随 .hswb 保存（旧版本打开忽略该标记）。
 - **其他**：更新下载、即刻更新、.hswb 关联、卸载数据保留策略与 1.2.4 一致。
 
-### 8.5 v1.2.4 新增行为对部署的影响（历史）
+### 9.5 v1.2.4 新增行为对部署的影响（历史）
 
 - **自动下载更新包**：程序发现新版本后会在后台把对应安装包（EXE 用户下 setup.exe，MSI 用户下 .msi）下载到 %LOCALAPPDATA%\HoneySky White Board\Updates\v<版本>\，同目录保留 .meta.json 下载记录；支持镜像回退与 Range 续传，下载完成用同一 Release 的 SHA256SUMS.txt 校验，校验失败会删除文件且不会运行。
 - **磁盘与带宽**：单个安装包约 74–90 MB。机房/还原卡环境请预留磁盘空间；完全禁网环境检查更新会静默跳过，不会报错打扰。
@@ -176,7 +212,7 @@ msiexec /i "HoneySkyWhiteBoard-1.2.6-win-x64.msi" /qn /norestart ALLUSERS=1 /l*v
 - **启动动画 3 秒可调**：「设置 → 常规 → 启动动画时长」可设 3–15 秒；机房可用 `--no-splash` 参数跳过启动页（在快捷方式目标后追加）。
 - **卸载清理**：Updates 目录位于用户数据根下，卸载默认保留；勾选「同时删除个人文档、设置和缓存」时按固定子目录清理（如阶段 B 实测发现未覆盖 Updates，需在发布报告中如实记录）。
 
-### 8.6 v1.2.3 行为变化对部署的影响（历史）
+### 9.6 v1.2.3 行为变化对部署的影响（历史）
 
 - **触控书写与掌擦**：触摸输入并入统一手势通道，掌压自动橡皮由「设置 → 书写 → 手掌误触自动橡皮」控制（默认开启）。教室一体机建议保持开启；若教师习惯用手掌支撑书写且出现误擦，可关闭该开关。
 - **Dock 尺寸**：默认放大到 1.10；「设置 → 工具栏 → Dock 大小」可在 0.85–1.40 调整。小屏/投影分辨率较低时可调小，窄窗口会自动等比回退避免遮挡画布按钮。
@@ -185,7 +221,7 @@ msiexec /i "HoneySkyWhiteBoard-1.2.6-win-x64.msi" /qn /norestart ALLUSERS=1 /l*v
 - **官网许可文案**：官网许可区为「不开源，正式版可免费使用」；机构采购仍以 EULA 与 LICENSE-PROPRIETARY.txt 为准。
 - v1.2.2 引入的全屏浮窗置顶、启动默认不提示恢复、清除缓存、更新检查顺序等行为继续适用。
 
-### 8.7 升级后检查
+### 9.7 升级后检查
 
 1. 「⋯ → 关于」显示 1.2.6，数据目录正确。
 2. 打开一份 1.0.0 或 1.1.x 保存的 .hswb，内容正常（旧文档按钢笔笔尖兼容读取）。
@@ -197,7 +233,7 @@ msiexec /i "HoneySkyWhiteBoard-1.2.6-win-x64.msi" /qn /norestart ALLUSERS=1 /l*v
 
 ---
 
-## 9. 批量部署检查清单
+## 10. 批量部署检查清单
 
 1. 在代表性机型（含触控一体机）上做一次冒烟：启动 → 书写 → 保存 `.hswb` → 关闭 → 双击文档重新打开。
 2. 确认卸载后 `%LOCALAPPDATA%\HoneySky White Board` 仍在（数据保留策略生效）。
@@ -208,7 +244,7 @@ msiexec /i "HoneySkyWhiteBoard-1.2.6-win-x64.msi" /qn /norestart ALLUSERS=1 /l*v
 
 ---
 
-## 10. 常见部署问题
+## 11. 常见部署问题
 
 | 现象 | 原因与处理 |
 | --- | --- |

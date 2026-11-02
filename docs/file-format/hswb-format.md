@@ -196,10 +196,10 @@ RectD：Key 0 = x，Key 1 = y，Key 2 = width，Key 3 = height（均为小数）
 
 ### 6.2 v1.2.6 笔型扩展（format_version 不变）
 
-- 新增 `brush_tip» 枚举值：`Straight = 3»（直线笔）、`Watercolor = 4»（水彩）、`Chalk = 5»（粉笔）。仅追加枚举值，**Key 15 的类型与编号、其余字段与 Key 编号均未改变**，因此 `format_version» 保持 1.1（`HswbFormat.ManifestFormatVersion = 1.1»、`HswbFormat.CurrentFormatVersion = 1»），无需迁移、写入器仍写 1.1。
+- 新增 `brush_tip` 枚举值：`Straight = 3`（直线笔）、`Watercolor = 4`（水彩）、`Chalk = 5`（粉笔）。仅追加枚举值，**Key 15 的类型与编号、其余字段与 Key 编号均未改变**，因此 `format_version` 保持 1.1（`HswbFormat.ManifestFormatVersion = 1.1`、`HswbFormat.CurrentFormatVersion = 1`），无需迁移、写入器仍写 1.1。
 - 向后兼容（旧版本读新文档）：1.2.5 及更早的读取器不认识 3/4/5，会落到「未知枚举按默认笔型（Pen）渲染」分支——不会崩溃、不会丢数据，但笔迹外观会与作者所见不同；用 1.2.6 打开即恢复。该行为为设计假设，**本轮未用 1.2.5 程序实测**（见风险登记册 R-82）。
 - 向前兼容（新版本读旧文档）：1.0–1.2.5 文档没有或只有 0/1/2，按原值读取，渲染与旧版一致；保存后原值保留，未使用新笔型的文档不会凭空获得新笔型。
-- 第三方解析器：把 Key 15 当整数读取即可；遇到 3/4/5 建议回退为 `Pen» 样式，并按第 6 节规则只在结构不兼容时才提升 `format_version»。
+- 第三方解析器：把 Key 15 当整数读取即可；遇到 3/4/5 建议回退为 `Pen` 样式，并按第 6 节规则只在结构不兼容时才提升 `format_version`。
 
 ## 7. 互操作建议
 
