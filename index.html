@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>HoneySky White Board — 写在无边的画布上</title>
+<meta name="description" content="HoneySky White Board 是为 Windows 打造的桌面白板：压感书写、尺规作图、时钟与倒计时独立窗口、浮动 Dock、文件导入背景、AI 讲台答题与 AI 助手。v1.2.6.1 让讲台底栏直接缩放画面，拍照与相册合并成一个入口、相册常驻并可对比保存；白板、讲台与 AI 助手不再互相置顶（时钟与倒计时仍置顶）；照片默认不落盘，可在「设置 → 展台」按 1–30 天保留；设置拆成 10 个页签。免费下载。" />
+<meta name="theme-color" content="#ffffff" />
+<meta property="og:title" content="HoneySky White Board" />
+<meta property="og:description" content="一支笔，一块无边的白板，和一个随时待命的 AI。" />
+<meta property="og:type" content="website" />
+<link rel="icon" type="image/png" href="assets/img/icon-1024.png" />
+<link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+
+<!-- ================= 导航 ================= -->
+<header class="nav" id="nav">
+  <div class="nav__inner">
+    <a class="brand" href="#top" aria-label="HoneySky White Board">
+      <img class="brand__mark" src="assets/img/icon-1024.png" alt="" width="24" height="24" aria-hidden="true" />
+      <span class="brand__name">HoneySky</span>
+    </a>
+    <nav class="nav__links" aria-label="主导航">
+      <a href="#features" data-i18n="nav.features">功能</a>
+      <a href="#requirements" data-i18n="nav.requirements">系统要求</a>
+      <a href="#download" data-i18n="nav.download">下载</a>
+      <a href="#license" data-i18n="nav.license">许可</a>
+    </nav>
+    <div class="nav__actions">
+      <div class="lang" role="group" aria-label="Language">
+        <button type="button" class="lang__btn is-active" data-lang="zh" aria-pressed="true">中</button>
+        <button type="button" class="lang__btn" data-lang="en" aria-pressed="false">EN</button>
+      </div>
+      <a class="btn btn--small btn--primary" href="#download" data-i18n="nav.cta">下载</a>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- ================= Hero ================= -->
+  <section class="hero">
+    <div class="hero__glow" aria-hidden="true"></div>
+    <div class="wrap hero__inner">
+      <p class="hero__eyebrow" data-i18n="hero.eyebrow">Windows 桌面白板 · v1.2.6.1</p>
+      <h1 class="hero__title" data-i18n="hero.product">HoneySky White Board</h1>
+      <p class="hero__tagline" data-i18n="hero.tagline">写在无边的画布上。</p>
+      <p class="hero__lead" data-i18n="hero.lead">一支笔，一块无边的白板，和一个随时待命的 AI。为 Windows 打造，压感书写与全部工具都在本地运行。</p>
+      <div class="hero__cta">
+        <a class="btn btn--primary btn--lg" href="#download">
+          <span data-i18n="hero.cta1">下载 Windows 版</span>
+          <span class="btn__meta">v1.2.6.1</span>
+        </a>
+        <a class="btn btn--ghost btn--lg" href="#features" data-i18n="hero.cta2">查看功能</a>
+      </div>
+      <p class="hero__note" data-i18n="hero.note">免费下载 · Windows 10 / 11 · x64</p>
+    </div>
+
+    <div class="wrap hero__stage reveal">
+      <figure class="shot shot--hero" data-shot data-ph="主界面截图 · hero-main.png（Lead 提供，≥1600px）">
+        <img src="assets/img/hero-main.png" alt="HoneySky White Board 主界面：左上角蓝色带笔图标 + 品牌字 + 版本号水印，无边画布上手写与图形，底部浮动 Dock（画笔、橡皮、形状、直尺、时钟、导入、AI 讲台、问 AI），左下角页面缩略图条，右下角翻页条与缩放条" width="2560" height="1392" fetchpriority="high" decoding="async" data-i18n-alt="img.hero" />
+      </figure>
+    </div>
+  </section>
+
+  <!-- ================= 功能 ================= -->
+  <section class="section section--light" id="features">
+    <div class="wrap">
+      <header class="section__head reveal">
+        <p class="kicker" data-i18n="features.kicker">功能</p>
+        <h2 class="display" data-i18n="features.title">为老师，也为每一个把想法画出来的人。</h2>
+        <p class="sub" data-i18n="features.lead">从一支笔开始，到 AI 讲台答题。每一处细节都为「讲清楚一件事」而设计。</p>
+      </header>
+    </div>
+
+    <!-- 1. 书写 -->
+    <div class="wrap feature feature--split reveal">
+      <div class="feature__text">
+        <p class="kicker" data-i18n="f1.kicker">书写与笔触</p>
+        <h3 class="headline" data-i18n="f1.title">像笔一样，像纸一样。</h3>
+        <p class="body" data-i18n="f1.body">笔迹平滑与压感整笔重绘，250 Hz 采样下依然跟手。橡皮可整笔擦除，也可局部擦除；手指绘画默认关闭，避免误触。</p>
+        <ul class="ticks">
+          <li data-i18n="f1.b1">压感笔迹与实时光滑</li>
+          <li data-i18n="f1.b2">局部擦除 / 整笔擦除两种橡皮</li>
+          <li data-i18n="f1.b3">自动化笔迹，随手写就有体面</li>
+          <li data-i18n="f1.b4">六种笔尖：钢笔 / 马克笔 / 毛笔 / 直线笔 / 水彩 / 粉笔</li>
+        </ul>
+      </div>
+      <figure class="shot shot--panel" data-shot data-ph="书写截图 · brush.png">
+        <img src="assets/img/brush.png" alt="Dock 的画笔二级面板：画笔 / 荧光笔切换、12 种颜色、粗细滑块，笔尖区两行排开钢笔 / 马克笔 / 毛笔 / 直线笔 / 水彩 / 粉笔六种笔尖" width="320" height="460" loading="lazy" decoding="async" data-i18n-alt="img.brush" />
+      </figure>
+    </div>
+
+    <!-- 2. 时间工具（深色） -->
+    <section class="section section--dark">
+      <div class="wrap">
+        <header class="section__head section__head--left reveal">
+          <p class="kicker kicker--honey"><span data-i18n="f2.kicker">时间工具</span><span class="badge" data-i18n="common.new">新</span></p>
+          <h2 class="display" data-i18n="f2.title">时钟与倒计时，搬到独立窗口。</h2>
+          <p class="sub" data-i18n="f2.lead">时钟与倒计时是始终置顶的独立窗口，不遮挡板书：字号与背景透明度都能调，字号放大后文字依然清晰。</p>
+        </header>
+        <div class="duo duo--dark duo--time">
+          <figure class="shot shot--canvas shot--framed" data-shot data-ph="时钟窗口截图 · clock.png">
+            <img src="assets/img/clock.png" alt="独立时钟窗口：橙色秒数、日期、网络授时状态与「立即校准」，字号与背景透明度可调，放大后依然清晰" width="511" height="310" loading="lazy" decoding="async" data-i18n-alt="img.clock" />
+            <figcaption class="shot__cap" data-i18n="f2.cap1">时钟 · 网络授时，字号与透明度即时可调</figcaption>
+          </figure>
+          <figure class="shot shot--canvas shot--framed" data-shot data-ph="倒计时窗口截图 · countdown.png">
+            <img src="assets/img/countdown.png" alt="独立倒计时窗口：05:00 待开始，10 秒 / 1 分 / 5 分 / 10 分 / 25 分预设与自定义分钟，开始、暂停、继续、重置" width="515" height="435" loading="lazy" decoding="async" data-i18n-alt="img.countdown" />
+            <figcaption class="shot__cap" data-i18n="f2.cap2">倒计时 · 最后 3 秒逐秒提示音，结束音效可辨识</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. AI -->
+    <section class="section section--light">
+      <div class="wrap">
+        <header class="section__head reveal">
+          <p class="kicker" data-i18n="f3.kicker">AI 讲台与助手</p>
+          <h2 class="display" data-i18n="f3.title">讲解不再是一个人对着黑板。</h2>
+          <p class="sub" data-i18n="f3.lead">把题目交给 AI 讲台：拍下纸张、贴入图片，AI 在白板上边写边讲，支持 LaTeX 公式；画面可调分辨率、色温与亮度，底栏能直接缩放，拍下的照片收进常驻相册对比讲解。日常答疑则交给角落里的 AI 助手浮窗。</p>
+        </header>
+        <div class="duo duo--ai">
+          <figure class="shot shot--stage shot--framed" data-shot data-ph="AI 讲台截图 · podium.png">
+            <img src="assets/img/podium.png" alt="AI 讲台的相册面板：标题「相册 1/24 张 · 当前：照片 1」，缩略图与「照片 1」，说明「保存：关闭（仅本次会话）」，以及「拍照 / 本地图片 / 对比图片 / 保存图片 / 删除当前照片 / 退出图片讲解」与「清空相册」按钮" width="812" height="400" loading="lazy" decoding="async" data-i18n-alt="img.podium" />
+            <figcaption class="shot__cap" data-i18n="f3.cap1">AI 讲台 · 相册：拍照收进相册，支持对比与保存</figcaption>
+          </figure>
+          <figure class="shot shot--canvas shot--framed" data-shot>
+            <img src="assets/img/ai-booth.png" alt="AI 助手浮窗：DeepSeek 回答的因式分解过程，块级公式正常渲染，底部有回答字号滑块与余额状态" width="1240" height="900" loading="lazy" decoding="async" data-i18n-alt="img.aibooth" />
+            <figcaption class="shot__cap" data-i18n="f3.cap2">AI 助手 · 随时呼出，用你自己的 API Key</figcaption>
+          </figure>
+        </div>
+        <p class="aside reveal" data-i18n="f3.note">AI 功能为可选能力，使用你自己的 OpenAI 兼容接口与 API Key；密钥经 Windows DPAPI 加密保存在本机。</p>
+      </div>
+    </section>
+
+    <!-- 4. 工具与组织（深色） -->
+    <section class="section section--dark">
+      <div class="wrap">
+        <header class="section__head section__head--left reveal">
+          <p class="kicker kicker--honey" data-i18n="f4.kicker">页面与工具</p>
+          <h2 class="display" data-i18n="f4.title">多页白板，工具栏按你的习惯排。</h2>
+          <p class="sub" data-i18n="f4.lead">一节课不止一页：缩略图栏随手翻页，导入的文档有页码、滑条与目录，缩放与适应窗口一键到位。工具栏里的工具能显示、固定、上下调序，画布右键还能复制、剪切、粘贴与置顶置底。</p>
+        </header>
+        <div class="duo duo--dark duo--work">
+          <figure class="shot shot--stage shot--framed" data-shot data-ph="多页与缩略图截图 · pages.png">
+            <img src="assets/img/pages.png" alt="左下角页面缩略图条只显示 3 个缩略图（第 3、4、5 页），右下角翻页条含全屏按钮：共 5 页白板，当前第 5 页" width="1680" height="1050" loading="lazy" decoding="async" data-i18n-alt="img.pages" />
+            <figcaption class="shot__cap" data-i18n="f4.cap1">多页与缩放 · 缩略图、翻页、适应窗口</figcaption>
+          </figure>
+          <figure class="shot shot--stage shot--framed" data-shot data-ph="设置与工具栏自定义截图 · settings.png">
+            <img src="assets/img/settings.png" alt="v1.2.6.1 设置窗口的展台页：顶部十个页签（常规 / 外观 / 书写 / 展台 / 工具栏 / 快捷键 / 动画 / 更新 / AI 服务 / 关于）；笔尖可选跟随白板或六种笔形，橡皮可选整笔或局部并调半径；相册可开启自动保存、设置照片保留天数 1–30 天与相册容量 1–50 张，底部是恢复展台默认设置" width="920" height="740" loading="lazy" decoding="async" data-i18n-alt="img.settings" />
+            <figcaption class="shot__cap" data-i18n="f4.cap2">设置 · 十个页签：展台页集中笔尖、橡皮与相册</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. 其余能力卡片 -->
+    <section class="section section--alt">
+      <div class="wrap">
+        <header class="section__head section__head--left reveal">
+          <p class="kicker" data-i18n="f5.kicker">还有这些</p>
+          <h2 class="display display--sm" data-i18n="f5.title">用得越久，越觉得顺手。</h2>
+        </header>
+        <div class="cards">
+          <article class="card reveal"><h3 data-i18n="c1.title">半透明荧光笔</h3><p data-i18n="c1.body">粉笔质感的高亮，叠在文字上不遮字，粗细可调。</p></article>
+          <article class="card reveal"><h3 data-i18n="c2.title">直尺与圆规</h3><p data-i18n="c2.body">屏幕上拉一把直尺，或画一个精确的圆，讲几何课很省事。</p></article>
+          <article class="card reveal"><h3 data-i18n="c3.title">自动保存与恢复</h3><p data-i18n="c3.body">定时自动保存，异常退出后下次启动可恢复上次的白板。</p></article>
+          <article class="card reveal"><h3 data-i18n="c4.title">背景与导出</h3><p data-i18n="c4.body">白板、纸张、深色背景随意换；一键导出高清图片。</p></article>
+          <article class="card reveal"><h3 data-i18n="c5.title">快捷键</h3><p data-i18n="c5.body">P 画笔、E 橡皮、K 时钟……常用操作都有快捷键。</p></article>
+          <article class="card reveal"><h3 data-i18n="c6.title">克制的界面</h3><p data-i18n="c6.body">浅色与深色主题，工具条与面板为课堂而不是为炫技而存在。</p></article>
+        </div>
+      </div>
+    </section>
+  </section>
+
+  <!-- ================= v1.2.6.1 新增 ================= -->
+  <section class="section section--light" id="whats-new">
+    <div class="wrap">
+      <header class="section__head section__head--left reveal">
+        <p class="kicker kicker--honey"><span data-i18n="f6.kicker">v1.2.6.1 新增</span><span class="badge" data-i18n="common.new">新</span></p>
+        <h2 class="display display--sm" data-i18n="f6.title">讲台更好按，设置更好找。</h2>
+        <p class="sub" data-i18n="f6.lead">这一版把讲台的操作密度收了一收：底栏能直接缩放画面，拍照和相册合并成一个入口，相册常驻、随手翻看与保存；白板、讲台与 AI 助手不再互相置顶（时钟与倒计时仍然置顶）；照片默认不落盘，需要时能在设置里按天保留；设置拆成 10 个页签，展台有独立一页。</p>
+      </header>
+      <div class="cards">
+        <article class="card reveal">
+          <h3 data-i18n="n1.title">展台画面直接缩放</h3>
+          <p data-i18n="n1.body">底栏新增 − / + 与当前倍率（从 1.0× 起），讲到细节时放大画面不用换页；缩放后笔迹、批注与拍照都跟着当前画面走。</p>
+        </article>
+        <article class="card reveal">
+          <h3 data-i18n="n2.title">拍照和相册合并</h3>
+          <p data-i18n="n2.body">底栏的「拍照」拍完直接收进相册，不再有下拉菜单；「相册」常驻底栏，随时打开、对比、保存或清空。</p>
+        </article>
+        <article class="card reveal">
+          <h3 data-i18n="n3.title">不再互相置顶</h3>
+          <p data-i18n="n3.body">白板、AI 讲台与 AI 助手互不压层，切回来还是刚才那一层；时钟与倒计时仍是独立的置顶窗口，讲课时始终可见。</p>
+        </article>
+        <article class="card reveal">
+          <h3 data-i18n="n4.title">相册常驻讲台</h3>
+          <p data-i18n="n4.body">相册从临时弹层变成常驻入口：支持本地图片、对比图片、保存图片、删除当前照片与退出图片讲解，一次讲解最多保留 24 张。</p>
+        </article>
+        <article class="card reveal">
+          <h3 data-i18n="n5.title">照片默认不落盘</h3>
+          <p data-i18n="n5.body">关闭讲台后照片只在本次会话保留；在「设置 → 展台」开启「自动保存拍照与本地图片到磁盘」后，可设保留天数（1–30 天）与相册容量（1–50 张），过期自动删除。</p>
+        </article>
+        <article class="card reveal">
+          <h3 data-i18n="n6.title">最小化与退出到底栏</h3>
+          <p data-i18n="n6.body">讲台底栏右下角常驻「最小化」与「退出讲台」，不再藏进右上角菜单，全屏讲解时也不用先找按钮。</p>
+        </article>
+        <article class="card reveal">
+          <h3 data-i18n="n7.title">展台笔形与橡皮分开设置</h3>
+          <p data-i18n="n7.body">笔尖可「跟随白板」或固定六种笔形之一（钢笔 / 马克笔 / 毛笔 / 直线笔 / 水彩 / 粉笔）；橡皮可整笔擦除或局部擦除，半径单独可调。</p>
+        </article>
+        <article class="card reveal">
+          <h3 data-i18n="n8.title">设置拆成十个页签</h3>
+          <p data-i18n="n8.body">常规 / 外观 / 书写 / 展台 / 工具栏 / 快捷键 / 动画 / 更新 / AI 服务 / 关于，十个页签各管一段；展台页集中笔尖、橡皮、相册与保留策略。</p>
+        </article>
+      </div>
+      <div class="duo duo--v125 reveal">
+        <figure class="shot shot--canvas shot--framed" data-shot data-ph="启动页截图 · splash.png">
+          <img src="assets/img/splash.png" alt="启动页：蓝色带笔图标、HoneySky White Board 与版本号，橙色进度圈与「正在加载画布…」，只剩品牌与进度，没有「即刻启动 / 以后直接显示」按钮" width="392" height="344" loading="lazy" decoding="async" data-i18n-alt="img.splash" />
+          <figcaption class="shot__cap" data-i18n="f6.cap1">启动页 · 只剩品牌与进度，两个按钮已移入设置</figcaption>
+        </figure>
+        <figure class="shot shot--canvas shot--framed" data-shot data-ph="关于页截图 · about.png">
+          <img src="assets/img/about.png" alt="设置 → 关于页：蓝色带笔图标、品牌字扫光、版本号，作者卡片保留 GitHub 仓库入口，另有检查更新、打开数据目录、清除缓存、第三方许可与软件更新卡" width="780" height="700" loading="lazy" decoding="async" data-i18n-alt="img.about" />
+          <figcaption class="shot__cap" data-i18n="f6.cap2">关于页 · 品牌与 GitHub 入口</figcaption>
+        </figure>
+      </div>
+      <p class="sub new-history" data-i18n="f6.history">v1.2.6 的讲台画面设置、六种笔尖、PPT 预取、时钟独立窗口与更新源自选都还在。</p>
+    </div>
+  </section>
+    </div>
+  </section>
+
+  <!-- ================= 系统要求 ================= -->
+  <section class="section section--light" id="requirements">
+    <div class="wrap">
+      <header class="section__head reveal">
+        <p class="kicker" data-i18n="req.kicker">系统要求</p>
+        <h2 class="display display--sm" data-i18n="req.title">几乎任何一台 Windows 电脑。</h2>
+        <p class="sub" data-i18n="req.lead">安装包自带 .NET 8 运行时，不需要你另外装环境。</p>
+      </header>
+      <div class="specs reveal">
+        <div class="spec"><p class="spec__k" data-i18n="req.k1">系统</p><p class="spec__v" data-i18n="req.v1">Windows 10 1809+ / Windows 11</p></div>
+        <div class="spec"><p class="spec__k" data-i18n="req.k2">架构</p><p class="spec__v" data-i18n="req.v2">x64</p></div>
+        <div class="spec"><p class="spec__k" data-i18n="req.k3">内存</p><p class="spec__v" data-i18n="req.v3">4 GB 及以上</p></div>
+        <div class="spec"><p class="spec__k" data-i18n="req.k4">运行时</p><p class="spec__v" data-i18n="req.v4">.NET 8（随包自带）</p></div>
+      </div>
+      <p class="aside aside--center reveal" data-i18n="req.note">建议 1280×800 及以上分辨率；支持触控笔与触屏，也支持鼠标。</p>
+    </div>
+  </section>
+
+  <!-- ================= 下载 ================= -->
+  <section class="section section--dark" id="download">
+    <div class="wrap">
+      <header class="section__head reveal">
+        <p class="kicker kicker--honey" data-i18n="dl.kicker">下载</p>
+        <h2 class="display" data-i18n="dl.title">选择一种方式装到电脑上。</h2>
+        <p class="sub" data-i18n="dl.lead">三个安装形态，内容完全一致。所有产物都列在 GitHub Releases，并附 SHA-256 校验和。</p>
+      </header>
+      <div class="dl-grid">
+        <article class="dl-card dl-card--featured reveal">
+          <p class="dl-card__tag" data-i18n="dl.tag1">推荐</p>
+          <h3 data-i18n="dl.c1.title">安装包（EXE）</h3>
+          <p class="dl-card__file"><code>HoneySkyWhiteBoard-1.2.6.1-win-x64-setup.exe</code></p>
+          <p class="dl-card__body" data-i18n="dl.c1.body">双击安装，自动创建桌面快捷方式与 .hswb 文件关联，可在系统设置里卸载。</p>
+          <a class="btn btn--primary btn--block" href="https://github.com/ChenyangLT/HoneySky-White-Board/releases/latest" rel="noopener" data-i18n="dl.get">前往 GitHub Releases</a>
+        </article>
+        <article class="dl-card reveal">
+          <p class="dl-card__tag dl-card__tag--muted" data-i18n="dl.tag2">批量部署</p>
+          <h3 data-i18n="dl.c2.title">安装包（MSI）</h3>
+          <p class="dl-card__file"><code>HoneySkyWhiteBoard-1.2.6.1-win-x64.msi</code></p>
+          <p class="dl-card__body" data-i18n="dl.c2.body">适合组策略、Intune 等企业分发，支持静默安装与标准卸载。</p>
+          <a class="btn btn--ghost btn--block" href="https://github.com/ChenyangLT/HoneySky-White-Board/releases/latest" rel="noopener" data-i18n="dl.get">前往 GitHub Releases</a>
+        </article>
+        <article class="dl-card reveal">
+          <p class="dl-card__tag dl-card__tag--muted" data-i18n="dl.tag3">免安装</p>
+          <h3 data-i18n="dl.c3.title">绿色版（ZIP）</h3>
+          <p class="dl-card__file"><code>HoneySkyWhiteBoard-1.2.6.1-win-x64-portable.zip</code></p>
+          <p class="dl-card__body" data-i18n="dl.c3.body">解压即用，不写注册表；数据默认保存在本地应用数据目录，可随包携带。</p>
+          <a class="btn btn--ghost btn--block" href="https://github.com/ChenyangLT/HoneySky-White-Board/releases/latest" rel="noopener" data-i18n="dl.get">前往 GitHub Releases</a>
+        </article>
+      </div>
+
+      <div class="checksum reveal">
+        <p class="checksum__label" data-i18n="dl.sum">SHA-256 校验和</p>
+        <p class="checksum__body" data-i18n="dl.sumBody">每个产物的 SHA-256 都写在 Release 附件的 <code>SHA256SUMS.txt</code> 中，可用 <code>certutil -hashfile &lt;文件&gt; SHA256</code> 或 <code>Get-FileHash</code> 核对。</p>
+        <p class="checksum__links">
+          <a href="https://github.com/ChenyangLT/HoneySky-White-Board/releases/latest" rel="noopener" data-i18n="dl.release">Release 页面</a>
+          <span aria-hidden="true">·</span>
+          <a href="https://github.com/ChenyangLT/HoneySky-White-Board/releases/latest/download/SHA256SUMS.txt" rel="noopener" data-i18n="dl.sumFile">SHA256SUMS.txt</a>
+        </p>
+      </div>
+      <p class="aside reveal" data-i18n="dl.note">仅提供已签名的二进制分发包，不提供源码。Windows 首次运行时可能提示「未知发布者」，这是未做代码签名的正常表现。</p>
+    </div>
+  </section>
+
+  <!-- ================= 许可 ================= -->
+  <section class="section section--light" id="license">
+    <div class="wrap">
+      <header class="section__head section__head--left reveal">
+        <p class="kicker" data-i18n="lic.kicker">许可</p>
+        <h2 class="display display--sm" data-i18n="lic.title">不开源，但正式版免费使用。</h2>
+        <p class="sub" data-i18n="lic.lead">HoneySky White Board 的源码不公开，软件本身免费：没有试用期，也没有需要付费解锁的功能，下载安装就能用。</p>
+      </header>
+      <ul class="license-list reveal">
+        <li data-i18n="lic.l1"><strong>免费使用：</strong>在自己的电脑上安装使用不收费，个人与课堂场景都一样，不需要登录或激活。</li>
+        <li data-i18n="lic.l2"><strong>不开源：</strong>源码不公开，Release 里提供的是安装包与文档；想了解具体实现了什么，可以看官网的功能说明或直接来问。</li>
+        <li data-i18n="lic.l3"><strong>第三方组件：</strong>随包使用的开源库遵循各自许可，清单见 THIRD_PARTY_NOTICES。</li>
+      </ul>
+      <p class="license-links reveal">
+        <a class="link" href="https://github.com/ChenyangLT/HoneySky-White-Board" rel="noopener" data-i18n="lic.repo">GitHub 仓库</a>
+        <a class="link" href="https://github.com/ChenyangLT/HoneySky-White-Board" rel="noopener" data-i18n="lic.notices">第三方声明</a>
+      </p>
+    </div>
+  </section>
+</main>
+
+<!-- ================= 页脚 ================= -->
+<footer class="footer">
+  <div class="wrap footer__inner">
+    <div class="footer__brand">
+      <img class="brand__mark brand__mark--sm" src="assets/img/icon-1024.png" alt="" width="20" height="20" aria-hidden="true" />
+      <span>HoneySky White Board</span>
+    </div>
+    <p class="footer__meta">
+      <span data-i18n="foot.version">版本 1.2.6.1</span>
+      <span aria-hidden="true">·</span>
+      <span data-i18n="foot.copy">© 2026 Chen_yang_LT</span>
+      <span aria-hidden="true">·</span>
+      <span data-i18n="foot.prop">不开源 · 正式版免费</span>
+    </p>
+    <p class="footer__links">
+      <a href="https://github.com/ChenyangLT/HoneySky-White-Board" rel="noopener" data-i18n="foot.repo">GitHub</a>
+      <a href="#license" data-i18n="foot.license">许可</a>
+      <a href="#top" data-i18n="foot.top">返回顶部</a>
+    </p>
+  </div>
+</footer>
+
+<script src="assets/js/main.js"></script>
+</body>
+</html>
