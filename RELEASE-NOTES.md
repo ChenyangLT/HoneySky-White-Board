@@ -1,50 +1,61 @@
-# HoneySky White Board v1.2.5 发布说明
+# HoneySky White Board v1.2.6 发布说明
 
-发布日期：2026-11-02（构建与验证已于 2026-11-02 00:40–00:44 完成；GitHub 发布待 website 更新并经 Lead 确认后执行）
-上一版：v1.2.4
+- 发布日期：2026-11-02（三产物构建完成于 2026-11-02 23:49–23:50，校验值为真实产物）
+- 版本：1.2.6（上一版 1.2.5）
+- 系统要求：Windows 10/11 64 位（x64），无需预装 .NET 运行时（自包含）
+- 许可：专有软件，正式版可免费使用；不开源。安装包未做代码签名，首次运行 SmartScreen/杀毒软件可能提示“未知发布者”，请核对下方 SHA-256 后运行。
 
 ## 本版亮点
 
-- **画布更顺手**：右键即可复制、剪切、粘贴、复制一份、删除、调整层级；对象可以“固定”锁定，锁定后不会被误拖、误删或被橡皮擦掉，操作全部可 Ctrl+Z 撤销。
-- **放大页面更流畅**：背景图（扫描件、PDF 页、图片）改为按缩放级别缓存多级预缩放图，放大与平移时不再每帧对原图整图重采样；实测 zoom 4 从 32.62 降到 3.98 ms/帧（30.7 → 251 FPS），zoom 8 从 32.27 降到 3.51 ms/帧；Word 26 页首次 Load 302 ms、后续每页 113.7 ms。
-- **PPT / PPTX 可以直接导入**：优先调用本机 PowerPoint 导出 PDF 后沿用现有 PDF 页渲染，支持常见入场动画分步呈现；没有安装 Office 时给出中文提示，不会崩溃。
-- **Word 导入更快**：改为按需分页栅格化，导入完成即可进入书写，不再等待全部页面渲染；Word 阅读模式支持居中排版、按页/按宽度适配、字号 A−/A+ 与三档行距，长单词与中文换行不溢出页宽。字号与行距不再每次导入都询问，按默认排版静默导入。
-- **界面统一蓝色品牌图标**：顶栏、启动页、更新窗口、关于页统一使用官方蓝色图标（蓝渐变圆角方、白云与白铅笔），关于页移除个人主页入口，保留 GitHub 仓库链接。
-- **启动更可控**：设置页新增“启动时立即进入主界面”和“启动时显示动画”，启动页不再放“即刻启动/以后不要再显示启动界面”两个按钮。
-- **显示可微调**：设置页新增左上角水印大小（0.6–1.6）与右下角操作条大小（0.7–1.5）。
+- **AI 讲台影像增强**：摄像头采集分辨率可选 640×480 / 720p / 1080p / 1440p / 设备默认，显示分辨率可选 720p / 1080p / 1440p / 原始长边；色温 2000–10000K、饱和度 0–200%、对比度与亮度 50–150% 可调并可重置，适合不同教室灯光与投影。
+- **讲台缩放与相册**：画面可缩放 1.0–6.0（滚轮以光标为中心，中键/右键拖动平移，双击重置），批注与画面同步缩放；拍照最多缓存 24 张，底栏相册入口可网格浏览、点击讲解、删除单张、清空并保存合成 PNG，缓存可持久化到本地。
+- **书写更跟手**：背景页与笔画渲染改为增量追加 + 自适应渲染比例，长笔画不再整页重建；新增钢笔/水彩/粉笔三种笔尖（共 6 种），水彩多层低透明、粉笔颗粒稳定不闪，旧笔型保持原样。
+- **PPT 切页更稳**：同源文件复用动画引擎并预取下一页，切页时先显示静态页或上一帧再启动动画，减少白屏与冻结；低配机器自动降低动画帧率。
+- **时钟真正独立**：时钟/倒计时窗口不再附属于主窗口，主窗最小化或失焦时仍可显示在其他软件之上；关闭主窗口时一并关闭，不残留进程。
+- **更新源可选**：更新弹窗与关于页新增更新源选择（自动镜像优先 / GitHub 官方 / gh-proxy.com 镜像 / ghproxy.net 镜像），自动模式按镜像顺序回退，下载与 SHA-256 校验使用同一源顺序。
+- **关于页作者头像**：自动获取作者头像并本地缓存 24 小时，失败时回退内置蓝色品牌图标；主界面所有品牌图标统一为蓝底带笔图标。
+- **启动页与设置精简**：启动页只保留图标、名称、版本与进度；设置 → 常规新增「笔画算法」（自动 / 流畅优先 / 平衡 / 画质优先）并给出机型建议，改动即时生效。
 
 ## 下载
 
-| 形态 | 文件 |
-| --- | --- |
-| EXE 安装包（推荐） | HoneySkyWhiteBoard-1.2.5-win-x64-setup.exe |
-| MSI 安装包（批量部署） | HoneySkyWhiteBoard-1.2.5-win-x64.msi |
-| 绿色便携版 | HoneySkyWhiteBoard-1.2.5-win-x64-portable.zip |
-
-三产物校验值（SHA-256，与同目录 SHA256SUMS.txt 一致）：
-
-| 产物 | 字节 | SHA-256 |
+| 形态 | 文件 | 适用场景 |
 | --- | --- | --- |
-| HoneySkyWhiteBoard-1.2.5-win-x64-setup.exe | 81,378,218 | d3bbca486b2048b3b66b88bd575439755f00885233d5a9fa7942459aa558af4d |
-| HoneySkyWhiteBoard-1.2.5-win-x64.msi | 90,382,444 | ff5aff6d856b143b4aed72528b0661437e391cd1a70c41136b6bccafc2c6effa |
-| HoneySkyWhiteBoard-1.2.5-win-x64-portable.zip | 110,861,040 | ab3fa38d0852ef111be009081c9f150ae05680a5af5db7e663d66c1f32a925ef |
+| EXE 安装包 | HoneySkyWhiteBoard-1.2.6-win-x64-setup.exe | 推荐；双击安装，注册 .hswb 文件关联，可按用户选择安装目录 |
+| MSI 安装包 | HoneySkyWhiteBoard-1.2.6-win-x64.msi | 企业批量部署（msiexec），支持 MajorUpgrade 就地升级 |
+| 绿色版 | HoneySkyWhiteBoard-1.2.6-win-x64-portable.zip | 解压即用，数据写在程序目录 Data 下（不可写时回退到 %LOCALAPPDATA%） |
 
-- 下载页：https://chenyanglt.github.io/HoneySky-White-Board/
-- Release 页：https://github.com/ChenyangLT/HoneySky-White-Board/releases/tag/v1.2.5（资产在网站更新并经 Lead GO 后上传，上传后即生效）
-- 本版未做代码签名，SmartScreen 提示“未知发布者”属正常现象：请先核对 SHA-256，再选择“更多信息 → 仍要运行”。
+## 校验值（SHA-256，真实产物）
 
-## 如何更新
+| 文件 | 字节 | SHA-256 |
+| --- | --- | --- |
+| HoneySkyWhiteBoard-1.2.6-win-x64-setup.exe | 81,397,089 | e74858784ace48e730720e08a649a29873eb6601bf20e085da39baff200ff3ab |
+| HoneySkyWhiteBoard-1.2.6-win-x64.msi | 90,439,788 | 15944a941c58d495cc594cf5251a499d2434f72b9fe6be7d3147bb447c445924 |
+| HoneySkyWhiteBoard-1.2.6-win-x64-portable.zip | 110,896,499 | aa965916a0177d46b791342451bc73d05bb04f54ece7f83cfb78b22eac0cdb6a |
 
-1. 已安装 1.2.4 的用户：打开“设置 → 关于”或“⋯ → 检查更新”，发现 v1.2.5 后程序会自动后台下载并校验 SHA-256。
-2. 下载完成点“即刻更新”，确认后会关闭程序并安装 1.2.5，安装完成后自动重新打开白板。
-3. 也可以手动下载上面的安装包直接覆盖安装：EXE 与 MSI 均无需先卸载；文档、设置、缓存、更新包缓存与 .hswb 文件关联全部保留。
-4. 绿色版：解压覆盖程序目录即可，保留 Data 目录（含文档、设置与下载缓存）。
-5. 升级后“设置 → 关于”应显示 1.2.5。
+完整清单与逐行校验见 Release 附件 SHA256SUMS.txt（356 B，SHA-256 6156f97bad2adaf142ef4d8bbd2d1765a6e5516de2c6e33e62f255f206e8b1d2）。
+
+- GitHub Release：https://github.com/ChenyangLT/HoneySky-White-Board/releases/tag/v1.2.6 （四个附件：EXE、MSI、绿色版 zip、SHA256SUMS.txt）
+- 产品官网：https://chenyanglt.github.io/HoneySky-White-Board/
+- 版本差异与完整验收记录：docs/release/v1.2.6-changes.md、docs/delivery-report.md
+
+校验方式（Windows PowerShell）：
+
+    Get-FileHash .\HoneySkyWhiteBoard-1.2.6-win-x64-setup.exe -Algorithm SHA256
+
+比对结果与上表一致后再运行安装包。
+
+## 从 1.2.5 升级
+
+- EXE：直接运行 1.2.6 安装包覆盖安装，安装目录、数据与文件关联保留。
+- MSI：msiexec /i HoneySkyWhiteBoard-1.2.6-win-x64.msi，MajorUpgrade 自动卸载旧版本再安装；ProductCode 为 {D523D5E7-D8BB-44A1-83F4-C1F5EF4FFD6B}，UpgradeCode 不变。
+- 绿色版：把新 zip 解压覆盖到原程序目录（保留 Data 目录与 portable.marker）即可，用户数据不受影响。
+- 用户数据默认保留在 %LOCALAPPDATA%\HoneySky White Board（文档 / 设置 / 缓存 / 缩略图 / 恢复 / 日志）；卸载时默认不删除，可在卸载向导中勾选「同时删除个人文档、设置和缓存」。
 
 ## 已知限制
 
-- 未做代码签名，首次运行需要按上面说明核对 SHA-256 后放行。
-- PPT/PPTX 导入依赖本机安装的 Microsoft PowerPoint（COM）；无 Office 或 COM 不可用时只提示，不自动转换。
-- 复杂/不支持的 PowerPoint 动画（路径动画、触发器、切换效果）不支持分步呈现，降级为淡入整页显示；.ppt 二进制按整页单步呈现（无动画）。
-- Word 阅读模式不提供目录：WPF 分页器无法把 TextPointer 精确映射到页码，给出估算页码会误导，因此 v1.2.5 不显示目录按钮。
-- 高 DPI / 多显示器、摄像头画面路径、压感笔硬件仍需目标机复验。
+- 安装包未做代码签名，SmartScreen 可能显示「未知发布者」，请用 SHA-256 核对文件。
+- 摄像头相关功能需要本机摄像头与 Windows 隐私授权；无摄像头时讲台显示「未检测到摄像头」并可重试。
+- 更新检测依赖 GitHub API 与镜像站点，网络受限时可能只能得到「暂时无法检查更新」，不影响主程序。
+- AI 讲台相册默认最多 24 张（可在设置中调整）；相册缓存占用 %LOCALAPPDATA%\HoneySky White Board\Cache\PodiumAlbum。
+- 只提供 x64 安装包；ARM64 与 32 位系统未验证。
+- 目录/版本以 docs/release/v1.2.6-changes.md 与 docs/delivery-report.md 为准。

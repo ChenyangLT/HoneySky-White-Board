@@ -1,6 +1,8 @@
 # 第三方组件与许可声明（THIRD_PARTY NOTICES）
 
-HoneySky White Board 1.2.0（下称“本软件”）由 Chen_yang_LT 发布，包含下列第三方开源软件。各组件版权归其各自作者所有，并按下列许可证分发。完整许可证原文位于 docs/licenses/ 目录，本文件随安装包一起分发。
+HoneySky White Board 1.2.6（下称“本软件”）由 Chen_yang_LT 发布，包含下列第三方开源软件。各组件版权归其各自作者所有，并按下列许可证分发。完整许可证原文位于 docs/licenses/ 目录，本文件随安装包一起分发。
+
+本版（1.2.6）**未新增或升级任何第三方 NuGet 包**：讲台相册、新笔型、PPT 切页、时钟独立窗口、关于页头像与更新源选择均为本软件自有代码（提示音使用 .NET 内置 System.Media.SoundPlayer，自合成 PCM，无新增音频库）；下表组件与 1.2.5 一致。
 
 ## 1. 随程序分发的运行时组件
 
@@ -8,7 +10,7 @@ HoneySky White Board 1.2.0（下称“本软件”）由 Chen_yang_LT 发布，�
 |---|---|---|---|---|
 | SkiaSharp | 2.88.9 | MIT | 画布渲染、图像处理 | docs/licenses/MIT.txt、docs/licenses/skiasharp-license.txt |
 | SkiaSharp.NativeAssets.Win32 | 2.88.9 | MIT（含第三方声明） | Skia 本机库（libSkiaSharp.dll） | docs/licenses/skiasharp-third-party-notices.txt |
-| MessagePack (MessagePack-CSharp) | 2.5.198 | MIT | 文档数据序列化 | docs/licenses/MIT.txt |
+| MessagePack (MessagePack-CSharp) | 2.5.307 | MIT | 文档数据序列化（v1.2.4 由 2.5.198 安全升级至 2.5.307） | docs/licenses/MIT.txt |
 | CommunityToolkit.Mvvm | 8.3.2 | MIT | MVVM 基础设施 | docs/licenses/MIT.txt |
 | Microsoft.Extensions.DependencyInjection | 8.0.1 | MIT | 依赖注入 | docs/licenses/MIT.txt |
 | System.Security.Cryptography.ProtectedData | 8.0.0 | MIT | 使用 DPAPI 加密 API Key | docs/licenses/MIT.txt |

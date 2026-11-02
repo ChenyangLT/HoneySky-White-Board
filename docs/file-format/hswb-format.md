@@ -8,7 +8,7 @@
 - 扩展名：.hswb；资源管理器文件类型名称：HoneySky 白板文档。
 - 外层容器：标准 ZIP（deflate 压缩，可选任意 ZIP 工具解包查看）。
 - 文本编码：UTF-8。**本实现写出 manifest.json 时不带 BOM**（v1.0.0 修复：带 BOM 会让第三方 `JsonDocument.Parse(byte[])` 解析失败），读取端兼容带/不带 BOM。
-- 当前写出格式版本：1.1（format_version = 1.1）；读取端接受 1.0 与 1.1（1.0 文档按默认笔尖读取，见第 5 节 StrokeObject 的 Key 15）。
+- 当前写出格式版本：1.1（format_version = 1.1）；读取端接受 1.0 与 1.1（1.0 文档按默认笔尖读取，见第 5 节 StrokeObject 的 Key 15）。v1.2.6 新增的直线笔 / 水彩 / 粉笔只是 Key 15 的枚举值扩展，**不提升 format_version**，见 6.2。
 - 校验：对压缩后的文档数据与每个图片资源分别记录 SHA-256（小写十六进制）。
 - 安全性：MessagePack 使用 UntrustedData 模式反序列化，禁止类型注入；渲染层不执行脚本。
 - 兼容策略：读取时 format_version 大于当前软件支持版本（> 1.1）将拒绝打开并提示升级；1.0 文档可直接读取，DocumentMigrator 负责归一化；写入器始终写 1.1。
@@ -52,7 +52,7 @@
 
 | 字段 | 类型 | 必需 | 说明 |
 |---|---|---|---|
-| format_version | 数字（可带小数） | 是 | 容器与数据格式版本，当前写出 1.1；读取接受 1.0 与 1.1 |
+| format_version | 数字（可带小数） | 是 | 容器与数据格式版本，当前写出 1.1（v1.2.6 亦为 1.1）；读取接受 1.0 与 1.1 |
 | app_version | 字符串 | 否 | 写入时的软件版本，仅作记录 |
 | document_id | 字符串 | 是 | 文档唯一标识（GUID 的 N 格式，32 位十六进制） |
 | document_name | 字符串 | 否 | 文档名称，缺省为“未命名白板” |
@@ -128,7 +128,7 @@ StrokeObject（Key 10 起）
 | 12 | 枚举 | kind：Pen=0、Highlighter=1 |
 | 13 | 布尔 | pressure_enabled（是否按压感变宽） |
 | 14 | 数组 | points，StrokePoint 列表（权威数据：原始采样点） |
-| 15 | 枚举 | brush_tip：Pen=0、Marker=1、Brush=2；缺省按 Pen 读取（1.0 文档没有此字段） |
+| 15 | 枚举 | brush_tip：Pen=0、Marker=1、Brush=2、Straight=3（v1.2.6 直线笔）、Watercolor=4（v1.2.6 水彩）、Chalk=5（v1.2.6 粉笔）；缺省按 Pen 读取（1.0 文档没有此字段） |
 
 ShapeObject（Key 10 起）
 
@@ -175,7 +175,7 @@ RectD：Key 0 = x，Key 1 = y，Key 2 = width，Key 3 = height（均为小数）
 ## 5. 读取与校验流程（参考实现）
 
 1. 以只读方式打开 ZIP；查找 manifest.json 并反序列化。
-2. 校验 format_version 在 1.0 与当前支持版本（1.1）之间；大于 1.1 拒绝，1.0 归一化为 1.1。
+2. 校验 format_version 在 1.0 与当前支持版本（1.1）之间；大于 1.1 拒绝，1.0 归一化为 1.1（v1.2.6 文档仍写 1.1，因此 1.1.0 起的读取器都能打开）。
 3. 读取 document.msgpack.gz，计算 SHA-256 并与 manifest 比较，不匹配即报“文档校验失败”。
 4. MessagePack 反序列化为 BoardDocument，再经 DocumentMigrator 归一化（不支持的版本报错，未来版本在此加入迁移步骤）。
 5. 逐条读取 assets 清单中的条目并校验 SHA-256；缺失的条目跳过（图片显示为占位提示）。
@@ -193,6 +193,13 @@ RectD：Key 0 = x，Key 1 = y，Key 2 = width，Key 3 = height（均为小数）
 - `format_version` 由 `1` 提升为 `1.1`：笔迹对象新增 `brush_tip`（Key 15），其余结构与 Key 编号不变。
 - 读取 1.0 文档时 `brush_tip` 缺失，按 `Pen` 处理，渲染效果与旧版一致；保存后写为 1.1。
 - 1.0 版读取器打开 1.1 文档会因 `format_version` 超范围而拒绝（符合“未来版本拒绝”策略），不尝试忽略新字段。
+
+### 6.2 v1.2.6 笔型扩展（format_version 不变）
+
+- 新增 `brush_tip» 枚举值：`Straight = 3»（直线笔）、`Watercolor = 4»（水彩）、`Chalk = 5»（粉笔）。仅追加枚举值，**Key 15 的类型与编号、其余字段与 Key 编号均未改变**，因此 `format_version» 保持 1.1（`HswbFormat.ManifestFormatVersion = 1.1»、`HswbFormat.CurrentFormatVersion = 1»），无需迁移、写入器仍写 1.1。
+- 向后兼容（旧版本读新文档）：1.2.5 及更早的读取器不认识 3/4/5，会落到「未知枚举按默认笔型（Pen）渲染」分支——不会崩溃、不会丢数据，但笔迹外观会与作者所见不同；用 1.2.6 打开即恢复。该行为为设计假设，**本轮未用 1.2.5 程序实测**（见风险登记册 R-82）。
+- 向前兼容（新版本读旧文档）：1.0–1.2.5 文档没有或只有 0/1/2，按原值读取，渲染与旧版一致；保存后原值保留，未使用新笔型的文档不会凭空获得新笔型。
+- 第三方解析器：把 Key 15 当整数读取即可；遇到 3/4/5 建议回退为 `Pen» 样式，并按第 6 节规则只在结构不兼容时才提升 `format_version»。
 
 ## 7. 互操作建议
 
