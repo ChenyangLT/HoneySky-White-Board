@@ -458,6 +458,9 @@ code {
 
 .shot--panel > img { border: 0; border-radius: var(--radius-sm); background: #fff; }
 
+/* 白画框里的说明文字要用深色（深色区块里也照样可读） */
+.shot--panel .shot__cap { color: var(--ink-2); }
+
 /* 图片缺失时退回文字占位 */
 .shot.is-empty { min-height: 240px; }
 .shot.is-empty img { display: none; }
@@ -634,7 +637,7 @@ code {
 /* 两列等高画框：比例按每组截图的形状取，图片 contain 呈现（不裁切、不变形） */
 .duo--work .shot { --shot-ar: 4 / 3; }
 
-.duo--ai .shot { --shot-ar: 3 / 2; }
+.duo--ai .shot { --shot-ar: 7 / 5; }
 
 /* 时钟 / 倒计时两张截图的宽高比差别很大（511x310 ≈ 1.65 与 515x435 ≈ 1.18），直接套 4/3
    会让其中一张左右或上下空出一大块，两列还会一高一矮、图注错位。这里取 1.27 作为平衡值：

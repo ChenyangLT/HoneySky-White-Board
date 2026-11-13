@@ -4,7 +4,7 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>HoneySky White Board — 写在无边的画布上</title>
-<meta name="description" content="HoneySky White Board 是为 Windows 打造的桌面白板：压感书写、尺规作图、时钟与倒计时独立窗口、浮动 Dock、文件导入背景、AI 讲台与 AI 助手。v1.2.7.1 把笔刷修稳：钢笔与马克笔快速甩动不再断成虚线，水彩去掉多余中心线，粉笔保持水平，直线笔按住即有预览，画笔面板移除荧光笔；讲台打开即全屏，悬浮 Dock 可拖动、可收起成小胶囊，左下新增鸟瞰图，更多菜单只留三项；「问 AI」改为右侧抽屉（主界面与讲台各一个），图片来源只剩摄像头拍照、本地图片与剪贴板；白板不再常驻置顶，时钟图钉统一管理所有 HoneySky 窗口。免费下载。" />
+<meta name="description" content="HoneySky White Board 是为 Windows 打造的桌面白板：压感书写、尺规作图、时钟与倒计时独立窗口、浮动 Dock、文件导入背景、AI 讲台与 AI 助手。v1.2.7.2 把讲台画面调顺：画面设置面板不再被画面遮挡，采集与显示分辨率默认拉到最高，旋转画面更稳定；AI 抽屉的回答区随窗口自适应，左侧箭头即可收起；设置的「更新」页集中管理更新源、下载与已下载的安装包，配置可一键导出与导入，下载能取消、已下载的包能删除。免费下载。" />
 <meta name="theme-color" content="#ffffff" />
 <meta property="og:title" content="HoneySky White Board" />
 <meta property="og:description" content="一支笔，一块无边的白板，和一个随时待命的 AI。" />
@@ -43,14 +43,14 @@
   <section class="hero">
     <div class="hero__glow" aria-hidden="true"></div>
     <div class="wrap hero__inner">
-      <p class="hero__eyebrow" data-i18n="hero.eyebrow">Windows 桌面白板 · v1.2.7.1</p>
+      <p class="hero__eyebrow" data-i18n="hero.eyebrow">Windows 桌面白板 · v1.2.7.2</p>
       <h1 class="hero__title" data-i18n="hero.product">HoneySky White Board</h1>
       <p class="hero__tagline" data-i18n="hero.tagline">写在无边的画布上。</p>
       <p class="hero__lead" data-i18n="hero.lead">一支笔，一块无边的白板，和一个随时待命的 AI。为 Windows 打造，压感书写与全部工具都在本地运行。</p>
       <div class="hero__cta">
         <a class="btn btn--primary btn--lg" href="#download">
           <span data-i18n="hero.cta1">下载 Windows 版</span>
-          <span class="btn__meta">v1.2.7.1</span>
+          <span class="btn__meta">v1.2.7.2</span>
         </a>
         <a class="btn btn--ghost btn--lg" href="#features" data-i18n="hero.cta2">查看功能</a>
       </div>
@@ -119,16 +119,16 @@
         <header class="section__head reveal">
           <p class="kicker" data-i18n="f3.kicker">AI 讲台与助手</p>
           <h2 class="display" data-i18n="f3.title">讲解不再是一个人对着黑板。</h2>
-          <p class="sub" data-i18n="f3.lead">把题目交给 AI 讲台：打开即全屏，拍下纸张、贴入图片，AI 在白板上边写边讲，支持 LaTeX 公式；画面可调分辨率、色温与亮度，悬浮 Dock 可左右拖动、也能收起成小胶囊，拍照、相册、画面、旋转与问 AI 都在扩展条上，左下鸟瞰图拖动即可移动画面。日常答疑交给右侧抽屉里的 AI 助手——主界面与讲台各一个，三种图源，回答字号可调。</p>
+          <p class="sub" data-i18n="f3.lead">把题目交给 AI 讲台：打开即全屏，拍下纸张、贴入图片，AI 在白板上边写边讲，支持 LaTeX 公式；画面设置面板不再被画面挡住，采集与显示分辨率默认最高，旋转画面也稳定了，色温与亮度照旧可调；悬浮 Dock 可左右拖动、也能收起成小胶囊，拍照、相册、画面、旋转与问 AI 都在扩展条上，左下鸟瞰图拖动即可移动画面。日常答疑交给右侧抽屉里的 AI 助手——主界面与讲台各一个，回答区随窗口高度自适应，点左侧箭头就能把抽屉收起。</p>
         </header>
         <div class="duo duo--ai">
-          <figure class="shot shot--stage shot--framed" data-shot data-ph="AI 讲台截图 · podium.png">
-            <img src="assets/img/podium.png" alt="AI 讲台：全屏画面与悬浮玻璃 Dock（画笔、橡皮、颜色、拍照、相册、画面、旋转、问 AI、更多），左下角鸟瞰图，右上角最小化与退出展台" width="812" height="400" loading="lazy" decoding="async" data-i18n-alt="img.podium" />
-            <figcaption class="shot__cap" data-i18n="f3.cap1">AI 讲台 · 打开即全屏，悬浮 Dock 可收起</figcaption>
+          <figure class="shot shot--stage shot--framed" data-shot data-ph="讲台画面设置截图 · podium.png">
+            <img src="assets/img/podium.png" alt="AI 讲台：黑底画面设置弹层完整显示在按钮行上方——采集分辨率「设备最高（自动）」、显示分辨率「原始（不缩放）」、实际采集 1280×720，调色与缩放可调；下方是拍照 / 相册 / 画面 / 旋转 / 问 AI 扩展条与悬浮 Dock" width="1400" height="1000" loading="lazy" decoding="async" data-i18n-alt="img.podium" />
+            <figcaption class="shot__cap" data-i18n="f3.cap1">AI 讲台 · 画面设置不再被按钮行遮挡，采集与显示默认最高</figcaption>
           </figure>
           <figure class="shot shot--canvas shot--framed" data-shot>
-            <img src="assets/img/ai-booth.png" alt="AI 助手右侧抽屉：DeepSeek 回答的因式分解过程，块级公式正常渲染；上方三种图源（摄像头拍照 / 本地图片 / 剪贴板），底部回答字号滑块与余额状态" width="1240" height="900" loading="lazy" decoding="async" data-i18n-alt="img.aibooth" />
-            <figcaption class="shot__cap" data-i18n="f3.cap2">AI 助手 · 右侧抽屉，三种图源</figcaption>
+            <img src="assets/img/ai-booth.png" alt="白板画布与右侧 AI 抽屉：DeepSeek 回答 x²−5x+6=0 的因式分解步骤与答案，块级公式正常渲染；回答区自适应填满抽屉高度，左缘露出一枚 24×64 的展开 / 收起箭头把手，底部余额显示「已关闭查询」" width="1600" height="1000" loading="lazy" decoding="async" data-i18n-alt="img.aibooth" />
+            <figcaption class="shot__cap" data-i18n="f3.cap2">AI 助手 · 回答区自适应，点左侧箭头收起</figcaption>
           </figure>
         </div>
         <p class="aside reveal" data-i18n="f3.note">AI 功能为可选能力，使用你自己的 OpenAI 兼容接口与 API Key；密钥经 Windows DPAPI 加密保存在本机。</p>
@@ -148,9 +148,9 @@
             <img src="assets/img/pages.png" alt="左下角页面缩略图条只显示 3 个缩略图（第 3、4、5 页），右下角翻页条含全屏按钮：共 5 页白板，当前第 5 页" width="1680" height="1050" loading="lazy" decoding="async" data-i18n-alt="img.pages" />
             <figcaption class="shot__cap" data-i18n="f4.cap1">多页与缩放 · 缩略图、翻页、适应窗口</figcaption>
           </figure>
-          <figure class="shot shot--stage shot--framed" data-shot data-ph="设置与工具栏自定义截图 · settings.png">
-            <img src="assets/img/settings.png" alt="设置窗口的展台页：顶部十个页签（常规 / 外观 / 书写 / 展台 / 工具栏 / 快捷键 / 动画 / 更新 / AI 服务 / 关于）；笔尖可选跟随白板或六种笔形，橡皮可选整笔或局部并调半径；相册可开启自动保存、设置照片保留天数 1–30 天与相册容量 1–50 张，底部是恢复展台默认设置" width="920" height="740" loading="lazy" decoding="async" data-i18n-alt="img.settings" />
-            <figcaption class="shot__cap" data-i18n="f4.cap2">设置 · 十个页签：展台页集中笔尖、橡皮与相册</figcaption>
+          <figure class="shot shot--panel" data-shot data-ph="设置更新页截图 · settings.png">
+            <img src="assets/img/settings.png" alt="设置「更新」页：当前版本 v1.2.7.2，尚未检查；卡内含立即检查更新、查看发布页、更新内容与下载状态，更新源可选「自动（镜像优先）」或 GitHub 直连，并说明下载可取消、已下载的安装包可删除" width="1040" height="940" loading="lazy" decoding="async" data-i18n-alt="img.settings" />
+            <figcaption class="shot__cap" data-i18n="f4.cap2">设置 · 更新项集中在「更新」页，下载可取消、可删除</figcaption>
           </figure>
         </div>
       </div>
@@ -175,46 +175,46 @@
     </section>
   </section>
 
-  <!-- ================= v1.2.7.1 修正与增强 ================= -->
+  <!-- ================= v1.2.7.2 修正与增强 ================= -->
   <section class="section section--light" id="whats-new">
     <div class="wrap">
       <header class="section__head section__head--left reveal">
-        <p class="kicker kicker--honey"><span data-i18n="f6.kicker">v1.2.7.1 修正与增强</span><span class="badge" data-i18n="common.new">新</span></p>
-        <h2 class="display display--sm" data-i18n="f6.title">线条更稳，讲台更干净。</h2>
-        <p class="sub" data-i18n="f6.lead">这一版把笔刷修稳、把讲台收干净：快速甩动不再断成虚线，水彩去掉多余中心线，粉笔保持水平，直线笔按住就有实时预览，荧光笔入口移除（旧笔迹照常显示）。讲台打开即全屏，悬浮 Dock 可左右拖动、可收起成小胶囊，左下多了一张鸟瞰图，更多菜单只留三项；「问 AI」改为右侧抽屉，主界面与讲台各一个，图片来源只剩摄像头、本地图片与剪贴板。白板不再常驻置顶，时钟图钉统一管理所有 HoneySky 窗口。</p>
+        <p class="kicker kicker--honey"><span data-i18n="f6.kicker">v1.2.7.2 修正与增强</span><span class="badge" data-i18n="common.new">新</span></p>
+        <h2 class="display display--sm" data-i18n="f6.title">讲台更顺，设置更集中。</h2>
+        <p class="sub" data-i18n="f6.lead">这一版把讲台画面与设置收顺：画面设置面板不再被画面遮挡，采集与显示分辨率默认拉到最高，旋转画面更稳；AI 抽屉的回答区随窗口自适应，左侧箭头一键收起；设置的「更新」页集中管理更新源、检查、下载与已下载安装包，配置能一键导出与导入，下载可取消、已下载的包也能删除。</p>
       </header>
       <div class="cards">
         <article class="card reveal">
-          <h3 data-i18n="n1.title">快速甩动不断线</h3>
-          <p data-i18n="n1.body">钢笔与马克笔快速移动、还没松手，笔迹也不会断成「- - - -」，一笔到底。</p>
+          <h3 data-i18n="n1.title">画面设置不再被挡</h3>
+          <p data-i18n="n1.body">讲台的画面设置面板改成不会被画面盖住的浮层，调分辨率、色温、亮度时不必先把画面拖开，改完立即生效。</p>
         </article>
         <article class="card reveal">
-          <h3 data-i18n="n2.title">水彩、粉笔与直线笔</h3>
-          <p data-i18n="n2.body">水彩不再多出一条中心线；粉笔的笔触方向改为水平，画直线也不弯；直线笔按住即见实时预览，松手落笔。</p>
+          <h3 data-i18n="n2.title">采显默认最高</h3>
+          <p data-i18n="n2.body">采集与显示分辨率默认选最高档，投影出来更清楚；需要省性能时再往下调。</p>
         </article>
         <article class="card reveal">
-          <h3 data-i18n="n3.title">荧光笔已移除</h3>
-          <p data-i18n="n3.body">画笔面板不再提供荧光笔，需要半透明效果用马克笔；旧 .hswb 里已有的荧光笔笔迹照常显示。</p>
+          <h3 data-i18n="n3.title">旋转更稳</h3>
+          <p data-i18n="n3.body">画面旋转重新处理了坐标与尺寸，连续旋转不再错位或闪退，批注跟着画面一起转。</p>
         </article>
         <article class="card reveal">
-          <h3 data-i18n="n4.title">讲台打开即全屏</h3>
-          <p data-i18n="n4.body">讲台不再有窗口化模式：打开就是全屏，只有「最小化」和「退出展台」两种状态，讲解时不会误触窗口边框。</p>
+          <h3 data-i18n="n4.title">AI 回答区自适应</h3>
+          <p data-i18n="n4.body">AI 抽屉的回答区随窗口高度伸缩，长回答在自己的区域里滚动，输入框与按钮始终固定在底部。</p>
         </article>
         <article class="card reveal">
-          <h3 data-i18n="n5.title">悬浮 Dock 与鸟瞰图</h3>
-          <p data-i18n="n5.body">讲台底栏是悬浮的玻璃胶囊，可左右拖动、也能收起成 32×24 小胶囊；拍照、相册、画面、旋转、问 AI 都在展开的扩展条上，左下鸟瞰图拖动即可移动画面。</p>
+          <h3 data-i18n="n5.title">左侧箭头收起</h3>
+          <p data-i18n="n5.body">抽屉左缘加了一枚收起箭头，讲课时点一下就把 AI 收走，需要时再滑出来。</p>
         </article>
         <article class="card reveal">
-          <h3 data-i18n="n6.title">更多菜单只留三项</h3>
-          <p data-i18n="n6.body">「更多」里只保留讲台设置、最小化、退出展台，其余入口都搬到悬浮 Dock 的扩展条，找东西不用再翻两层菜单。</p>
+          <h3 data-i18n="n6.title">更新页集中管理</h3>
+          <p data-i18n="n6.body">设置新增「更新」页：更新源、立即检查、下载进度与已下载的安装包都在一处，不用再在关于页和弹窗之间来回找。</p>
         </article>
         <article class="card reveal">
-          <h3 data-i18n="n7.title">「问 AI」改为右侧抽屉</h3>
-          <p data-i18n="n7.body">主界面和讲台各有一个右侧抽屉：从右边滑入，回答区独立滚动、底部问答区固定；图片来源只有摄像头拍照、本地图片、剪贴板，拍照直接截当前画面进候选，预览紧凑，回答字号可调。</p>
+          <h3 data-i18n="n7.title">配置导入导出</h3>
+          <p data-i18n="n7.body">设置可一键导出配置文件，换电脑或重装时导入即可恢复；导出的是可读的 JSON，便于备份。</p>
         </article>
         <article class="card reveal">
-          <h3 data-i18n="n8.title">时钟图钉管全局置顶</h3>
-          <p data-i18n="n8.body">白板主窗口不再常驻置顶；时钟右上角的图钉打开时，所有 HoneySky 窗口一起置顶，关掉时时钟只压在白板上方；关掉白板窗口，时钟仍留在屏幕上。</p>
+          <h3 data-i18n="n8.title">下载可取消可删除</h3>
+          <p data-i18n="n8.body">更新包下载中途可以取消，已下载的安装包也能直接删除，不再占着磁盘。</p>
         </article>
       </div>
       <div class="duo duo--v125 reveal">
@@ -227,7 +227,7 @@
           <figcaption class="shot__cap" data-i18n="f6.cap2">关于页 · 品牌与 GitHub 入口</figcaption>
         </figure>
       </div>
-      <p class="sub new-history" data-i18n="f6.history">v1.2.7 的触控仲裁、增量渲染、独立时钟、多 NTP 与讲台 Dock 精简都还在。</p>
+      <p class="sub new-history" data-i18n="f6.history">v1.2.7.1 的笔刷修复、全屏讲台、右侧抽屉与图钉置顶都还在。</p>
     </div>
   </section>
 
@@ -261,21 +261,21 @@
         <article class="dl-card dl-card--featured reveal">
           <p class="dl-card__tag" data-i18n="dl.tag1">推荐</p>
           <h3 data-i18n="dl.c1.title">安装包（EXE）</h3>
-          <p class="dl-card__file"><code>HoneySkyWhiteBoard-1.2.7.1-win-x64-setup.exe</code></p>
+          <p class="dl-card__file"><code>HoneySkyWhiteBoard-1.2.7.2-win-x64-setup.exe</code></p>
           <p class="dl-card__body" data-i18n="dl.c1.body">双击安装，自动创建桌面快捷方式与 .hswb 文件关联，可在系统设置里卸载。</p>
           <a class="btn btn--primary btn--block" href="https://github.com/ChenyangLT/HoneySky-White-Board/releases/latest" rel="noopener" data-i18n="dl.get">前往 GitHub Releases</a>
         </article>
         <article class="dl-card reveal">
           <p class="dl-card__tag dl-card__tag--muted" data-i18n="dl.tag2">批量部署</p>
           <h3 data-i18n="dl.c2.title">安装包（MSI）</h3>
-          <p class="dl-card__file"><code>HoneySkyWhiteBoard-1.2.7.1-win-x64.msi</code></p>
+          <p class="dl-card__file"><code>HoneySkyWhiteBoard-1.2.7.2-win-x64.msi</code></p>
           <p class="dl-card__body" data-i18n="dl.c2.body">适合组策略、Intune 等企业分发，支持静默安装与标准卸载。</p>
           <a class="btn btn--ghost btn--block" href="https://github.com/ChenyangLT/HoneySky-White-Board/releases/latest" rel="noopener" data-i18n="dl.get">前往 GitHub Releases</a>
         </article>
         <article class="dl-card reveal">
           <p class="dl-card__tag dl-card__tag--muted" data-i18n="dl.tag3">免安装</p>
           <h3 data-i18n="dl.c3.title">绿色版（ZIP）</h3>
-          <p class="dl-card__file"><code>HoneySkyWhiteBoard-1.2.7.1-win-x64-portable.zip</code></p>
+          <p class="dl-card__file"><code>HoneySkyWhiteBoard-1.2.7.2-win-x64-portable.zip</code></p>
           <p class="dl-card__body" data-i18n="dl.c3.body">解压即用，不写注册表；数据默认保存在本地应用数据目录，可随包携带。</p>
           <a class="btn btn--ghost btn--block" href="https://github.com/ChenyangLT/HoneySky-White-Board/releases/latest" rel="noopener" data-i18n="dl.get">前往 GitHub Releases</a>
         </article>
@@ -323,7 +323,7 @@
       <span>HoneySky White Board</span>
     </div>
     <p class="footer__meta">
-      <span data-i18n="foot.version">版本 1.2.7.1</span>
+      <span data-i18n="foot.version">版本 1.2.7.2</span>
       <span aria-hidden="true">·</span>
       <span data-i18n="foot.copy">© 2026 Chen_yang_LT</span>
       <span aria-hidden="true">·</span>

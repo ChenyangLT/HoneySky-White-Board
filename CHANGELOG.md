@@ -2,6 +2,16 @@
 
 本文件记录对外发布版本的主要变化。详细交付信息见 `docs/delivery-report.md` 与 `docs/release/` 下的历史报告。
 
+## v1.2.7.2（2026-11-13）
+
+- 版本与安装身份：1.2.7.2（四段版本，AssemblyVersion / FileVersion 1.2.7.2）；MSI 新 ProductCode {17980B49-5DA4-47C7-99AE-ECB4DE61B897}，UpgradeCode {B7D41E2A-9C33-4F6B-8E21-5A0C3D9F6B14} 与 Inno AppId 不变；最低系统 Windows 10 1709（build 16299）不变。
+- 讲台：修复「画面」弹层被底部按钮行遮挡；新装默认「采集=设备最高 / 显示=原始不缩放」并做旧配置一次性迁移；修复连续点击旋转（≥2 次）触发内存溢出崩溃。
+- AI 抽屉：回答区改为真正撑满可用高度（空态与有回答均填满，长回答内部滚动）；关闭从右上角 ✕ 改为左边缘中部箭头把手（收起/展开，UIA 保留与新增对应名称）。
+- 设置：软件更新相关项从「关于」页迁到新的「更新」页（检查更新 / 更新源 / 进度 / 即刻更新 / 重试 / 发布页 / 更新内容）；「常规」页新增配置导入导出（不含文档与 API Key 明文）；更新下载支持取消（无 .part 残留）与删除已下载安装包。
+- 发布工程（阶段 A 已完成）：版本号全线 1.2.7.2；build / Verify-Release / Test-Upgrade（基线 1.2.7.1）/ Run-Release / publish-github / Verify-Online 默认参数同步；新增 make-v1272-probes.ps1；全部 .ps1 ParseFile 0 错误；publish-github.ps1 -DryRun -Version 1.2.7.2 退出 0；dist 未改动。
+- 阶段 B 待执行：三产物构建、Verify-Release（新 ProductCode）、1.2.7.1 → 1.2.7.2 升级实测、GitHub Release / Pages 与线上核对。
+- 详细说明：docs/release/v1.2.7.2-changes.md、docs/release/v1.2.7.2-release-notes.md、docs/delivery-report.md。
+
 ## v1.2.7.1（2026-11-13）
 
 - 版本与安装身份：1.2.7.1（AssemblyVersion / FileVersion 1.2.7.1）；MSI ProductCode {114177D4-D9B1-42A9-92A9-25C22FBEC362}，UpgradeCode {B7D41E2A-9C33-4F6B-8E21-5A0C3D9F6B14} 不变；安装器最低系统 Windows 10 1709（build 16299）。
