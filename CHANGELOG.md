@@ -2,6 +2,18 @@
 
 本文件记录对外发布版本的主要变化。详细交付信息见 `docs/delivery-report.md` 与 `docs/release/` 下的历史报告。
 
+## v1.2.7（2026-11-13）
+
+- 版本号 1.2.6.1 → 1.2.7（三段版本，AssemblyVersion/FileVersion 1.2.7.0）；MSI 换新 ProductCode {61D4585B-2EFB-46DF-828A-BFD05A637F74}，UpgradeCode {B7D41E2A-9C33-4F6B-8E21-5A0C3D9F6B14} 与 Inno AppId {A8E3F1C7-5B2D-4E9A-8C61-7F0B92D4E3A5} 不变。
+- 最低系统明确为 Windows 10 1709（build 16299）及以上：Inno Setup MinVersion=10.0.16299；MSI 增加 Package InstallerVersion="500" 与 LaunchCondition（Installed OR (VersionNT >= 1000 AND WindowsBuild >= 16299)）。
+- D1 触控仲裁：多指落笔按触摸类型与顺序仲裁主触点，其余触点用于掌擦/手势。
+- D2/D3 画笔与橡皮性能：笔画与擦除增量处理，长文档延迟降低。
+- D5 时钟拆为独立进程，时钟窗口右上角新增「图钉」，可让全部 HoneySky 窗口保持置顶。
+- D6 倒计时新增常用时长选择器；D7 支持多个 NTP 服务器并可自定义。
+- D8 讲台 Dock 只保留书写相关功能，其余收进「⋯」。
+- 阶段 A（版本号/安装器/脚本/文档）自检：8 个 .ps1 BOM + ParseFile 0 错误，publish-github.ps1 DryRun 退出码 0；三产物构建与发布见 docs/delivery-report.md（阶段 B）。
+- 详细变更与验收见 docs/release/v1.2.7-changes.md。
+
 ## v1.2.6.1（2026-11-03）
 
 - 版本号规则：改用四段版本 1.2.6.1（AssemblyVersion/FileVersion 只接受 4 段）；MSI 换新 ProductCode {278E9BFD-8116-4878-9EA2-7733D6C44432}，UpgradeCode 不变。
