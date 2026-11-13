@@ -2,6 +2,18 @@
 
 本文件记录对外发布版本的主要变化。详细交付信息见 `docs/delivery-report.md` 与 `docs/release/` 下的历史报告。
 
+## v1.2.7.1（2026-11-13）
+
+- 版本与安装身份：1.2.7.1（AssemblyVersion / FileVersion 1.2.7.1）；MSI ProductCode {114177D4-D9B1-42A9-92A9-25C22FBEC362}，UpgradeCode {B7D41E2A-9C33-4F6B-8E21-5A0C3D9F6B14} 不变；安装器最低系统 Windows 10 1709（build 16299）。
+- 笔刷与画笔面板：六笔尖修复（钢笔/马克笔快速甩动 gap=0、水彩去中心线、粉笔直线 p95 偏差 0.5px、直线笔实时预览）；删除荧光笔入口（旧文档笔迹照常渲染）。
+- 讲台：打开即全屏、无窗口化（只有最小化 / 退出展台）；拍照与相册并入可拖动、可收起的玻璃胶囊 Dock（收起 32×24）；左下角新增鸟瞰图，拖动可移动画面；「更多」只剩 3 项。
+- 问 AI：主界面与讲台共用右侧抽屉 AiPanel（420px，可中断滑入），回答区独立滚动（MinHeight 220、MaxHeight 45% 抽屉高度），字号滑块保留；图片来源只剩摄像头拍照 / 本地图片 / 剪贴板，删除页面截图按钮；讲台拍照直接截当前画面（含批注）入候选。
+- 图片问答修复：白底黑字题图不再误判过白（阈值仅平均亮度 ≥246 且近白 ≥99.5%）；真实 DeepSeek 服务解示例题通过。
+- 主窗口不再自动置顶（删除全屏自动置顶与 WM_ACTIVATEAPP 分支），图钉只对独立窗口生效；时钟 NTP 源扩展到 8 个；触控与书写性能继续优化。
+- 冻结与验证（2026-11-13）：sln Debug 0 警告 0 错误；HoneySky.Tests 1353/1353；HoneySky.UiTests 50/50；Verify-Release 62 项通过 0 失败；1.2.7 → 1.2.7.1 升级测试 101 项断言通过 0 失败（U1/U2/U3/U5a/U5b/U6；U4 perMachine 未测）。
+- 三产物：EXE 81,434,991 字节 SHA-256 e4025c43a2dc85ed8008bd5300c8642f6aacc57957a9409ba3c9b542903145ef；MSI 90,484,960 字节 SHA-256 526a38206330f8c48d4319dcda156741c886e8ec11a31eb833ca20d072e47c1f；绿色版 zip 110,952,356 字节 SHA-256 93188972336dd99fc0db9ebc68bbb711928f47c79c05f8b9a8df70983cd338fe。
+- 详细说明：docs/release/v1.2.7.1-changes.md、docs/release/v1.2.7.1-release-notes.md、docs/delivery-report.md。
+
 ## v1.2.7（2026-11-13）
 
 - 版本号 1.2.6.1 → 1.2.7（三段版本，AssemblyVersion/FileVersion 1.2.7.0）；MSI 换新 ProductCode {61D4585B-2EFB-46DF-828A-BFD05A637F74}，UpgradeCode {B7D41E2A-9C33-4F6B-8E21-5A0C3D9F6B14} 与 Inno AppId {A8E3F1C7-5B2D-4E9A-8C61-7F0B92D4E3A5} 不变。

@@ -4,7 +4,7 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>HoneySky White Board — 写在无边的画布上</title>
-<meta name="description" content="HoneySky White Board 是为 Windows 打造的桌面白板：压感书写、尺规作图、时钟与倒计时独立窗口、浮动 Dock、文件导入背景、AI 讲台答题与 AI 助手。v1.2.7 让触控单指优先当前工具、双指缩放不再误画，画笔增量渲染与橡皮局部重绘让长课更跟手；时钟与倒计时改为独立进程、关掉白板仍显示，图钉一键置顶全部窗口；倒计时可用滚轮选时间、5 个授时服务器可选；讲台底栏只留书写操作并可贴底收起。免费下载。" />
+<meta name="description" content="HoneySky White Board 是为 Windows 打造的桌面白板：压感书写、尺规作图、时钟与倒计时独立窗口、浮动 Dock、文件导入背景、AI 讲台与 AI 助手。v1.2.7.1 把笔刷修稳：钢笔与马克笔快速甩动不再断成虚线，水彩去掉多余中心线，粉笔保持水平，直线笔按住即有预览，画笔面板移除荧光笔；讲台打开即全屏，悬浮 Dock 可拖动、可收起成小胶囊，左下新增鸟瞰图，更多菜单只留三项；「问 AI」改为右侧抽屉（主界面与讲台各一个），图片来源只剩摄像头拍照、本地图片与剪贴板；白板不再常驻置顶，时钟图钉统一管理所有 HoneySky 窗口。免费下载。" />
 <meta name="theme-color" content="#ffffff" />
 <meta property="og:title" content="HoneySky White Board" />
 <meta property="og:description" content="一支笔，一块无边的白板，和一个随时待命的 AI。" />
@@ -43,14 +43,14 @@
   <section class="hero">
     <div class="hero__glow" aria-hidden="true"></div>
     <div class="wrap hero__inner">
-      <p class="hero__eyebrow" data-i18n="hero.eyebrow">Windows 桌面白板 · v1.2.7</p>
+      <p class="hero__eyebrow" data-i18n="hero.eyebrow">Windows 桌面白板 · v1.2.7.1</p>
       <h1 class="hero__title" data-i18n="hero.product">HoneySky White Board</h1>
       <p class="hero__tagline" data-i18n="hero.tagline">写在无边的画布上。</p>
       <p class="hero__lead" data-i18n="hero.lead">一支笔，一块无边的白板，和一个随时待命的 AI。为 Windows 打造，压感书写与全部工具都在本地运行。</p>
       <div class="hero__cta">
         <a class="btn btn--primary btn--lg" href="#download">
           <span data-i18n="hero.cta1">下载 Windows 版</span>
-          <span class="btn__meta">v1.2.7</span>
+          <span class="btn__meta">v1.2.7.1</span>
         </a>
         <a class="btn btn--ghost btn--lg" href="#features" data-i18n="hero.cta2">查看功能</a>
       </div>
@@ -59,7 +59,7 @@
 
     <div class="wrap hero__stage reveal">
       <figure class="shot shot--hero" data-shot data-ph="主界面截图 · hero-main.png（Lead 提供，≥1600px）">
-        <img src="assets/img/hero-main.png" alt="HoneySky White Board 主界面：左上角蓝色带笔图标 + 品牌字 + 版本号水印，无边画布上手写与图形，底部浮动 Dock（画笔、橡皮、形状、直尺、时钟、导入、AI 讲台、问 AI），左下角页面缩略图条，右下角翻页条与缩放条" width="2560" height="1392" fetchpriority="high" decoding="async" data-i18n-alt="img.hero" />
+        <img src="assets/img/hero-main.png" alt="HoneySky White Board 主界面：左上角蓝色带笔图标 + 品牌字 + 版本号水印，无边画布上手写与图形，底部浮动 Dock（画笔、橡皮、形状、直尺、时钟、导入、AI 讲台、问 AI），左下角页面缩略图条，右下角翻页条与缩放条" width="2560" height="1440" fetchpriority="high" decoding="async" data-i18n-alt="img.hero" />
       </figure>
     </div>
   </section>
@@ -88,7 +88,7 @@
         </ul>
       </div>
       <figure class="shot shot--panel" data-shot data-ph="书写截图 · brush.png">
-        <img src="assets/img/brush.png" alt="Dock 的画笔二级面板：画笔 / 荧光笔切换、12 种颜色、粗细滑块，笔尖区两行排开钢笔 / 马克笔 / 毛笔 / 直线笔 / 水彩 / 粉笔六种笔尖" width="320" height="460" loading="lazy" decoding="async" data-i18n-alt="img.brush" />
+        <img src="assets/img/brush.png" alt="Dock 的画笔二级面板：12 种颜色、粗细滑块，笔尖区两行排开钢笔 / 马克笔 / 毛笔 / 直线笔 / 水彩 / 粉笔六种笔尖；原来的荧光笔入口已移除" width="358" height="470" loading="lazy" decoding="async" data-i18n-alt="img.brush" />
       </figure>
     </div>
 
@@ -98,7 +98,7 @@
         <header class="section__head section__head--left reveal">
           <p class="kicker kicker--honey"><span data-i18n="f2.kicker">时间工具</span><span class="badge" data-i18n="common.new">新</span></p>
           <h2 class="display" data-i18n="f2.title">时钟与倒计时，独立成窗。</h2>
-          <p class="sub" data-i18n="f2.lead">时钟与倒计时现在跑在独立进程里，关掉白板也还在；窗口右上角的图钉一键决定是否压住所有 HoneySky 窗口；倒计时可以上下滚轮选时间，网络授时有 5 个服务器可选。</p>
+          <p class="sub" data-i18n="f2.lead">时钟与倒计时跑在独立进程里，关掉白板也还在。时钟右上角的图钉打开时，所有 HoneySky 窗口一起置顶；关掉图钉，时钟只压在白板上方。倒计时可以上下滚轮选时间，网络授时有 5 个服务器可选。</p>
         </header>
         <div class="duo duo--dark duo--time">
           <figure class="shot shot--canvas shot--framed" data-shot data-ph="时钟窗口截图 · clock.png">
@@ -119,16 +119,16 @@
         <header class="section__head reveal">
           <p class="kicker" data-i18n="f3.kicker">AI 讲台与助手</p>
           <h2 class="display" data-i18n="f3.title">讲解不再是一个人对着黑板。</h2>
-          <p class="sub" data-i18n="f3.lead">把题目交给 AI 讲台：拍下纸张、贴入图片，AI 在白板上边写边讲，支持 LaTeX 公式；画面可调分辨率、色温与亮度，底栏只留书写相关的操作、还能贴底收起，拍下的照片收进常驻相册对比讲解。日常答疑则交给角落里的 AI 助手浮窗。</p>
+          <p class="sub" data-i18n="f3.lead">把题目交给 AI 讲台：打开即全屏，拍下纸张、贴入图片，AI 在白板上边写边讲，支持 LaTeX 公式；画面可调分辨率、色温与亮度，悬浮 Dock 可左右拖动、也能收起成小胶囊，拍照、相册、画面、旋转与问 AI 都在扩展条上，左下鸟瞰图拖动即可移动画面。日常答疑交给右侧抽屉里的 AI 助手——主界面与讲台各一个，三种图源，回答字号可调。</p>
         </header>
         <div class="duo duo--ai">
           <figure class="shot shot--stage shot--framed" data-shot data-ph="AI 讲台截图 · podium.png">
-            <img src="assets/img/podium.png" alt="AI 讲台的相册面板：标题「相册 1/24 张 · 当前：照片 1」，缩略图与「照片 1」，说明「保存：关闭（仅本次会话）」，以及「拍照 / 本地图片 / 对比图片 / 保存图片 / 删除当前照片 / 退出图片讲解」与「清空相册」按钮" width="812" height="400" loading="lazy" decoding="async" data-i18n-alt="img.podium" />
-            <figcaption class="shot__cap" data-i18n="f3.cap1">AI 讲台 · 相册：拍照收进相册，支持对比与保存</figcaption>
+            <img src="assets/img/podium.png" alt="AI 讲台：全屏画面与悬浮玻璃 Dock（画笔、橡皮、颜色、拍照、相册、画面、旋转、问 AI、更多），左下角鸟瞰图，右上角最小化与退出展台" width="812" height="400" loading="lazy" decoding="async" data-i18n-alt="img.podium" />
+            <figcaption class="shot__cap" data-i18n="f3.cap1">AI 讲台 · 打开即全屏，悬浮 Dock 可收起</figcaption>
           </figure>
           <figure class="shot shot--canvas shot--framed" data-shot>
-            <img src="assets/img/ai-booth.png" alt="AI 助手浮窗：DeepSeek 回答的因式分解过程，块级公式正常渲染，底部有回答字号滑块与余额状态" width="1240" height="900" loading="lazy" decoding="async" data-i18n-alt="img.aibooth" />
-            <figcaption class="shot__cap" data-i18n="f3.cap2">AI 助手 · 随时呼出，用你自己的 API Key</figcaption>
+            <img src="assets/img/ai-booth.png" alt="AI 助手右侧抽屉：DeepSeek 回答的因式分解过程，块级公式正常渲染；上方三种图源（摄像头拍照 / 本地图片 / 剪贴板），底部回答字号滑块与余额状态" width="1240" height="900" loading="lazy" decoding="async" data-i18n-alt="img.aibooth" />
+            <figcaption class="shot__cap" data-i18n="f3.cap2">AI 助手 · 右侧抽屉，三种图源</figcaption>
           </figure>
         </div>
         <p class="aside reveal" data-i18n="f3.note">AI 功能为可选能力，使用你自己的 OpenAI 兼容接口与 API Key；密钥经 Windows DPAPI 加密保存在本机。</p>
@@ -164,7 +164,7 @@
           <h2 class="display display--sm" data-i18n="f5.title">用得越久，越觉得顺手。</h2>
         </header>
         <div class="cards">
-          <article class="card reveal"><h3 data-i18n="c1.title">半透明荧光笔</h3><p data-i18n="c1.body">粉笔质感的高亮，叠在文字上不遮字，粗细可调。</p></article>
+          <article class="card reveal"><h3 data-i18n="c1.title">半透明马克笔</h3><p data-i18n="c1.body">马克笔的半透明墨迹叠在文字上不遮字，粗细可调。</p></article>
           <article class="card reveal"><h3 data-i18n="c2.title">直尺与圆规</h3><p data-i18n="c2.body">屏幕上拉一把直尺，或画一个精确的圆，讲几何课很省事。</p></article>
           <article class="card reveal"><h3 data-i18n="c3.title">自动保存与恢复</h3><p data-i18n="c3.body">定时自动保存，异常退出后下次启动可恢复上次的白板。</p></article>
           <article class="card reveal"><h3 data-i18n="c4.title">背景与导出</h3><p data-i18n="c4.body">白板、纸张、深色背景随意换；一键导出高清图片。</p></article>
@@ -175,46 +175,46 @@
     </section>
   </section>
 
-  <!-- ================= v1.2.7 新增 ================= -->
+  <!-- ================= v1.2.7.1 修正与增强 ================= -->
   <section class="section section--light" id="whats-new">
     <div class="wrap">
       <header class="section__head section__head--left reveal">
-        <p class="kicker kicker--honey"><span data-i18n="f6.kicker">v1.2.7 新增</span><span class="badge" data-i18n="common.new">新</span></p>
-        <h2 class="display display--sm" data-i18n="f6.title">写得更顺，时钟更自由。</h2>
-        <p class="sub" data-i18n="f6.lead">这一版把触控和书写性能又推了一截：单指优先当前工具、双指缩放不再误画，画笔增量渲染与橡皮局部重绘让长课也不掉帧；时钟拆成独立进程，关掉白板仍能显示，图钉一键置顶所有 HoneySky 窗口；倒计时可以上下滚轮选时间，授时服务器有 5 个可选；讲台底栏只留书写相关操作，还能贴底收起。</p>
+        <p class="kicker kicker--honey"><span data-i18n="f6.kicker">v1.2.7.1 修正与增强</span><span class="badge" data-i18n="common.new">新</span></p>
+        <h2 class="display display--sm" data-i18n="f6.title">线条更稳，讲台更干净。</h2>
+        <p class="sub" data-i18n="f6.lead">这一版把笔刷修稳、把讲台收干净：快速甩动不再断成虚线，水彩去掉多余中心线，粉笔保持水平，直线笔按住就有实时预览，荧光笔入口移除（旧笔迹照常显示）。讲台打开即全屏，悬浮 Dock 可左右拖动、可收起成小胶囊，左下多了一张鸟瞰图，更多菜单只留三项；「问 AI」改为右侧抽屉，主界面与讲台各一个，图片来源只剩摄像头、本地图片与剪贴板。白板不再常驻置顶，时钟图钉统一管理所有 HoneySky 窗口。</p>
       </header>
       <div class="cards">
         <article class="card reveal">
-          <h3 data-i18n="n1.title">单指画，双指缩</h3>
-          <p data-i18n="n1.body">单指默认使用当前工具，双指缩放只缩画面、不落笔——触屏上写和缩放各走各的。</p>
+          <h3 data-i18n="n1.title">快速甩动不断线</h3>
+          <p data-i18n="n1.body">钢笔与马克笔快速移动、还没松手，笔迹也不会断成「- - - -」，一笔到底。</p>
         </article>
         <article class="card reveal">
-          <h3 data-i18n="n2.title">画笔增量渲染，长课不掉帧</h3>
-          <p data-i18n="n2.body">笔迹改为增量渲染，只重绘变化的部分；连续写满一屏也不再整页重算，抬笔即见。</p>
+          <h3 data-i18n="n2.title">水彩、粉笔与直线笔</h3>
+          <p data-i18n="n2.body">水彩不再多出一条中心线；粉笔的笔触方向改为水平，画直线也不弯；直线笔按住即见实时预览，松手落笔。</p>
         </article>
         <article class="card reveal">
-          <h3 data-i18n="n3.title">橡皮只重绘擦过的地方</h3>
-          <p data-i18n="n3.body">擦除改为局部重绘，擦一笔只刷新那一小块；大面积擦除不再整页卡住。</p>
+          <h3 data-i18n="n3.title">荧光笔已移除</h3>
+          <p data-i18n="n3.body">画笔面板不再提供荧光笔，需要半透明效果用马克笔；旧 .hswb 里已有的荧光笔笔迹照常显示。</p>
         </article>
         <article class="card reveal">
-          <h3 data-i18n="n4.title">时钟在独立进程里跑</h3>
-          <p data-i18n="n4.body">时钟与倒计时移出白板进程，关掉白板窗口也不会一起消失；时间一直走着。</p>
+          <h3 data-i18n="n4.title">讲台打开即全屏</h3>
+          <p data-i18n="n4.body">讲台不再有窗口化模式：打开就是全屏，只有「最小化」和「退出展台」两种状态，讲解时不会误触窗口边框。</p>
         </article>
         <article class="card reveal">
-          <h3 data-i18n="n5.title">右上角图钉，管住所有窗口</h3>
-          <p data-i18n="n5.body">时钟窗口右上角的图钉控制全部 HoneySky 窗口的置顶：钉住后白板、讲台与 AI 助手一起浮在最上层，松开恢复普通层级。</p>
+          <h3 data-i18n="n5.title">悬浮 Dock 与鸟瞰图</h3>
+          <p data-i18n="n5.body">讲台底栏是悬浮的玻璃胶囊，可左右拖动、也能收起成 32×24 小胶囊；拍照、相册、画面、旋转、问 AI 都在展开的扩展条上，左下鸟瞰图拖动即可移动画面。</p>
         </article>
         <article class="card reveal">
-          <h3 data-i18n="n6.title">时间用滚轮选</h3>
-          <p data-i18n="n6.body">倒计时的小时、分钟、秒可以直接上下滚动选择，不用反复点加减号；预设与自定义都保留。</p>
+          <h3 data-i18n="n6.title">更多菜单只留三项</h3>
+          <p data-i18n="n6.body">「更多」里只保留讲台设置、最小化、退出展台，其余入口都搬到悬浮 Dock 的扩展条，找东西不用再翻两层菜单。</p>
         </article>
         <article class="card reveal">
-          <h3 data-i18n="n7.title">5 个授时服务器可选</h3>
-          <p data-i18n="n7.body">网络授时提供 5 个 NTP 服务器，默认自动挑一个，也可以自己指定；某个连不上就换下一个。</p>
+          <h3 data-i18n="n7.title">「问 AI」改为右侧抽屉</h3>
+          <p data-i18n="n7.body">主界面和讲台各有一个右侧抽屉：从右边滑入，回答区独立滚动、底部问答区固定；图片来源只有摄像头拍照、本地图片、剪贴板，拍照直接截当前画面进候选，预览紧凑，回答字号可调。</p>
         </article>
         <article class="card reveal">
-          <h3 data-i18n="n8.title">讲台 Dock 只留书写，还能收起</h3>
-          <p data-i18n="n8.body">讲台底栏只保留笔、橡皮、颜色这些书写相关操作，一键贴到底边收起；讲解时画面更干净。</p>
+          <h3 data-i18n="n8.title">时钟图钉管全局置顶</h3>
+          <p data-i18n="n8.body">白板主窗口不再常驻置顶；时钟右上角的图钉打开时，所有 HoneySky 窗口一起置顶，关掉时时钟只压在白板上方；关掉白板窗口，时钟仍留在屏幕上。</p>
         </article>
       </div>
       <div class="duo duo--v125 reveal">
@@ -227,7 +227,7 @@
           <figcaption class="shot__cap" data-i18n="f6.cap2">关于页 · 品牌与 GitHub 入口</figcaption>
         </figure>
       </div>
-      <p class="sub new-history" data-i18n="f6.history">v1.2.6.1 的讲台缩放、相册常驻、十页签设置与照片按天保留都还在。</p>
+      <p class="sub new-history" data-i18n="f6.history">v1.2.7 的触控仲裁、增量渲染、独立时钟、多 NTP 与讲台 Dock 精简都还在。</p>
     </div>
   </section>
 
@@ -261,21 +261,21 @@
         <article class="dl-card dl-card--featured reveal">
           <p class="dl-card__tag" data-i18n="dl.tag1">推荐</p>
           <h3 data-i18n="dl.c1.title">安装包（EXE）</h3>
-          <p class="dl-card__file"><code>HoneySkyWhiteBoard-1.2.7-win-x64-setup.exe</code></p>
+          <p class="dl-card__file"><code>HoneySkyWhiteBoard-1.2.7.1-win-x64-setup.exe</code></p>
           <p class="dl-card__body" data-i18n="dl.c1.body">双击安装，自动创建桌面快捷方式与 .hswb 文件关联，可在系统设置里卸载。</p>
           <a class="btn btn--primary btn--block" href="https://github.com/ChenyangLT/HoneySky-White-Board/releases/latest" rel="noopener" data-i18n="dl.get">前往 GitHub Releases</a>
         </article>
         <article class="dl-card reveal">
           <p class="dl-card__tag dl-card__tag--muted" data-i18n="dl.tag2">批量部署</p>
           <h3 data-i18n="dl.c2.title">安装包（MSI）</h3>
-          <p class="dl-card__file"><code>HoneySkyWhiteBoard-1.2.7-win-x64.msi</code></p>
+          <p class="dl-card__file"><code>HoneySkyWhiteBoard-1.2.7.1-win-x64.msi</code></p>
           <p class="dl-card__body" data-i18n="dl.c2.body">适合组策略、Intune 等企业分发，支持静默安装与标准卸载。</p>
           <a class="btn btn--ghost btn--block" href="https://github.com/ChenyangLT/HoneySky-White-Board/releases/latest" rel="noopener" data-i18n="dl.get">前往 GitHub Releases</a>
         </article>
         <article class="dl-card reveal">
           <p class="dl-card__tag dl-card__tag--muted" data-i18n="dl.tag3">免安装</p>
           <h3 data-i18n="dl.c3.title">绿色版（ZIP）</h3>
-          <p class="dl-card__file"><code>HoneySkyWhiteBoard-1.2.7-win-x64-portable.zip</code></p>
+          <p class="dl-card__file"><code>HoneySkyWhiteBoard-1.2.7.1-win-x64-portable.zip</code></p>
           <p class="dl-card__body" data-i18n="dl.c3.body">解压即用，不写注册表；数据默认保存在本地应用数据目录，可随包携带。</p>
           <a class="btn btn--ghost btn--block" href="https://github.com/ChenyangLT/HoneySky-White-Board/releases/latest" rel="noopener" data-i18n="dl.get">前往 GitHub Releases</a>
         </article>
@@ -323,7 +323,7 @@
       <span>HoneySky White Board</span>
     </div>
     <p class="footer__meta">
-      <span data-i18n="foot.version">版本 1.2.7</span>
+      <span data-i18n="foot.version">版本 1.2.7.1</span>
       <span aria-hidden="true">·</span>
       <span data-i18n="foot.copy">© 2026 Chen_yang_LT</span>
       <span aria-hidden="true">·</span>
