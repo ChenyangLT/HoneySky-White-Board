@@ -2,14 +2,28 @@
 
 本文件记录对外发布版本的主要变化。详细交付信息见 `docs/delivery-report.md` 与 `docs/release/` 下的历史报告。
 
+## v1.2.8（2026-11-20）
+
+- 版本与安装身份：1.2.8（三段版本，AssemblyVersion / FileVersion / InformationalVersion 均为 1.2.8，Inno VersionInfoVersion 取 1.2.8.0）；MSI 新 ProductCode {8A6B54FD-022A-46D1-B23B-99C4B94D9B69}，UpgradeCode {B7D41E2A-9C33-4F6B-8E21-5A0C3D9F6B14} 与 Inno AppId 不变；最低系统 Windows 10 1709（build 16299）不变。
+- 依据：按《HoneySky 白板书写卡顿诊断报告》（2026-11-20，对象 v1.2.7.2；每点 16.67 ms CPU、4K 每帧全幅上传 31.64 MiB、日志无性能埋点）的厂商侧建议第 10–13 条实施。
+- 渲染路径（脏矩形上传）：`ViewportRasterCache` 新增 `LastRenderHit` 与 `TryRender/TryPatchRegion` 的可选 `blitRegion`，命中只贴变化矩形；`CanvasHost` 每帧以覆盖层（选中/套索/橡皮光标/进行中笔迹/形状预览）包围盒 + 新增对象 + 橡皮补丁算出脏区，脏区小于表面 60% 时只上传该矩形的 `WritePixels`，覆盖层绘制 `ClipRect` 到脏区；否则整幅上传。
+- 4K 像素预算：物理像素超过 4,000,000 时按 `sqrt(2,073,600/physical)` 限制渲染缩放（4K→0.50，内部 1920×1080 渲染后由 WPF 放大）；`CanvasHost.xaml` 的放大滤镜由 HighQuality 改 LowQuality。
+- 性能埋点：每次书写/橡皮结束向 `Logs\app.log` 写「书写性能：点数/时长/帧数/平均帧/最大帧/整幅上传/局部上传/渲染缩放/画布/档/CPU/每点/点数率」，自适应质量变化记「书写质量：…」，可直接与诊断报告数字对照。
+- 时钟修复：倒计时滚轮的上下箭头点不动（`WheelColumn.OnDragStart` 只判 `e.OriginalSource is Button`，真实输入命中的是按钮模板内元素 → 列抢走鼠标捕获 → 按钮不触发 Click）；改为沿视觉树判断是否落在 `ButtonBase` 内，命中箭头不再启动拖动；数值区拖动调节与滚轮/键盘不变。
+- 测试：HoneySky.Tests 新增 `RasterCacheDirtyRectTests`（4 个），HoneySky.UiTests 新增 `ClockCountdownWheelClickTests`（3 个，真实 `SetCursorPos`+`mouse_event` 输入，修复前为红）。
+- 冻结与验证（2026-11-20）：sln Debug 0 警告 0 错误；HoneySky.Tests 1364/1364；HoneySky.UiTests 70/70；构建 / Verify-Release / 升级测试 / 发布 / 线上校验结果见 docs/release/v1.2.8-*.log 与 docs/release/delivery-report-v1.2.8.md。
+- 详细说明：docs/release/v1.2.8-changes.md、docs/release/v1.2.8-release-notes.md。
+
 ## v1.2.7.2（2026-11-13）
 
 - 版本与安装身份：1.2.7.2（四段版本，AssemblyVersion / FileVersion 1.2.7.2）；MSI 新 ProductCode {17980B49-5DA4-47C7-99AE-ECB4DE61B897}，UpgradeCode {B7D41E2A-9C33-4F6B-8E21-5A0C3D9F6B14} 与 Inno AppId 不变；最低系统 Windows 10 1709（build 16299）不变。
 - 讲台：修复「画面」弹层被底部按钮行遮挡；新装默认「采集=设备最高 / 显示=原始不缩放」并做旧配置一次性迁移；修复连续点击旋转（≥2 次）触发内存溢出崩溃。
 - AI 抽屉：回答区改为真正撑满可用高度（空态与有回答均填满，长回答内部滚动）；关闭从右上角 ✕ 改为左边缘中部箭头把手（收起/展开，UIA 保留与新增对应名称）。
 - 设置：软件更新相关项从「关于」页迁到新的「更新」页（检查更新 / 更新源 / 进度 / 即刻更新 / 重试 / 发布页 / 更新内容）；「常规」页新增配置导入导出（不含文档与 API Key 明文）；更新下载支持取消（无 .part 残留）与删除已下载安装包。
-- 发布工程（阶段 A 已完成）：版本号全线 1.2.7.2；build / Verify-Release / Test-Upgrade（基线 1.2.7.1）/ Run-Release / publish-github / Verify-Online 默认参数同步；新增 make-v1272-probes.ps1；全部 .ps1 ParseFile 0 错误；publish-github.ps1 -DryRun -Version 1.2.7.2 退出 0；dist 未改动。
-- 阶段 B 待执行：三产物构建、Verify-Release（新 ProductCode）、1.2.7.1 → 1.2.7.2 升级实测、GitHub Release / Pages 与线上核对。
+- 发布工程（阶段 A）：版本号全线 1.2.7.2；build / Verify-Release / Test-Upgrade（基线 1.2.7.1）/ Run-Release / publish-github / Verify-Online 默认参数同步；新增 make-v1272-probes.ps1；全部 .ps1 ParseFile 0 错误；publish-github.ps1 -DryRun -Version 1.2.7.2 退出 0；dist 未改动。
+- 冻结与验证（2026-11-14）：sln Debug 0 警告 0 错误；HoneySky.Tests 1360/1360；HoneySky.UiTests 67/67；Verify-Release 62 项通过 0 失败；1.2.7.1 → 1.2.7.2 升级测试 101 项断言通过 0 失败（U1/U2/U3/U5a/U5b/U6；U4 perMachine 未测）。
+- 三产物（2026-11-14 00:13–00:15）：EXE 81,439,333 字节 SHA-256 8f6f475e13e9e7e049c52bfd8aff42cfbca0cd19366afc4371c0ca8d8501773b；MSI 90,472,672 字节 SHA-256 28ef40139c171661c8d32a3e91f0ca1511385d291c46d63adf84864978ee5332；绿色版 zip 110,957,751 字节 SHA-256 0dfa9716787054a91aa0a4240a4071dc85ca7b26fdc93a695f3e20089103573d。
+- GitHub Release 与官网（2026-11-14）：Release https://github.com/ChenyangLT/HoneySky-White-Board/releases/tag/v1.2.7.2 四资产上传（digest 与本地一致）；Pages 更新为 gh-pages 95cf553，Verify-Online 27 项通过 0 失败（首页 25,822 B、11 图逐字节一致）。
 - 详细说明：docs/release/v1.2.7.2-changes.md、docs/release/v1.2.7.2-release-notes.md、docs/delivery-report.md。
 
 ## v1.2.7.1（2026-11-13）
